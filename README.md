@@ -1,8 +1,8 @@
 # API for soyel.fr
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/51a77b1b-c6bd-4dde-8b7f-563a7ab3036f/mini.png)](https://insight.sensiolabs.com/projects/51a77b1b-c6bd-4dde-8b7f-563a7ab3036f)
-[![Build Status](https://travis-ci.org/soyel/api.soyel.fr.svg?branch=master)](https://travis-ci.org/soyel/api.soyel.fr)
-[![Coverage Status](https://img.shields.io/coveralls/soyel/api.soyel.fr.svg)](https://coveralls.io/r/soyel/api.soyel.fr)
+[![Build Status](https://travis-ci.org/jlagneau/demo-rest-api.svg)](https://travis-ci.org/jlagneau/demo-rest-api)
+[![Coverage Status](https://img.shields.io/coveralls/jlagneau/demo-rest-api.svg)](https://coveralls.io/r/jlagneau/demo-rest-api)
 
 ---
 
