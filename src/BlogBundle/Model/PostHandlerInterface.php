@@ -1,7 +1,6 @@
 <?php
 namespace BlogBundle\Model;
 
-
 interface PostHandlerInterface
 {
     /**
