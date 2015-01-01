@@ -1,11 +1,24 @@
 # API for soyel.fr
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/51a77b1b-c6bd-4dde-8b7f-563a7ab3036f/mini.png)](https://insight.sensiolabs.com/projects/51a77b1b-c6bd-4dde-8b7f-563a7ab3036f)
+[![Build Status](https://travis-ci.org/jlagneau/demo-rest-api.svg)](https://travis-ci.org/jlagneau/demo-rest-api)
+[![Coverage Status](https://img.shields.io/coveralls/jlagneau/demo-rest-api.svg)](https://coveralls.io/r/jlagneau/demo-rest-api)
+
 ---
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/9462ef70-573c-4c56-a162-4b32345d527d/big.png)](https://insight.sensiolabs.com/projects/9462ef70-573c-4c56-a162-4b32345d527d)
+## Install and run
 
----
+    $ curl -sS https://getcomposer.org/installer | php
+    $ php composer.phar install
 
-[![Build Status](https://travis-ci.org/soyel/api.soyel.fr.svg?branch=master)](https://travis-ci.org/soyel/api.soyel.fr)
-[![Coverage Status](https://img.shields.io/coveralls/soyel/api.soyel.fr.svg)](https://coveralls.io/r/soyel/api.soyel.fr)
-[![Dependency Status](https://www.versioneye.com/user/projects/549ac9806b1b81202d000115/badge.svg?style=flat)](https://www.versioneye.com/user/projects/549ac9806b1b81202d000115)
+Change configurations in `app/config/parameters.yml` if needed and run :
+
+    $ php app/console server:run &
+
+## API doc
+
+see http://localhost/doc/.
+
+## Tests
+
+    $ phpunit -c app/
