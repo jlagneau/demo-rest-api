@@ -1,0 +1,8 @@
+app::
+    type:     rest
+    prefix:   /v1
+    resource: BlogBundle\Controller\PostController
+
+appDoc:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /doc
