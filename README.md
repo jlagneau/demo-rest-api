@@ -1,4 +1,4 @@
-# API for soyel.fr
+# Demo REST API
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/51a77b1b-c6bd-4dde-8b7f-563a7ab3036f/mini.png)](https://insight.sensiolabs.com/projects/51a77b1b-c6bd-4dde-8b7f-563a7ab3036f)
 [![Build Status](https://travis-ci.org/jlagneau/demo-rest-api.svg)](https://travis-ci.org/jlagneau/demo-rest-api)
@@ -17,7 +17,7 @@ Change configurations in `app/config/parameters.yml` if needed and run :
 
 ## API doc
 
-see http://localhost/doc/.
+see [http://localhost:8000/app_dev.php/doc/](http://localhost:8000/app_dev.php/doc/).
 
 ## Tests
 
