@@ -2,17 +2,17 @@
 
 namespace BlogBundle\Tests\Handler;
 
-use BlogBundle\Entity\Post;
-use BlogBundle\Handler\PostHandler;
+use BlogBundle\Entity\Article;
+use BlogBundle\Handler\ArticleHandler;
 
-class PostHandlerTest extends \PHPUnit_Framework_TestCase
+class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
 {
-    const POST_CLASS = 'BlogBundle\Tests\Handler\DummyPost';
+    const Article_CLASS = 'BlogBundle\Tests\Handler\DummyArticle';
 
     /**
-     * @var BlogBundle\Handler\PostHandler $postHandler
+     * @var BlogBundle\Handler\ArticleHandler $articleHandler
      */
-    private $postHandler;
+    private $articleHandler;
 
     /**
     * @var Doctrine\Common\Persistence\ObjectManager $om
@@ -20,7 +20,7 @@ class PostHandlerTest extends \PHPUnit_Framework_TestCase
     private $om;
 
     /**
-    * @var BlogBundle\Entity\Post $entityClass
+    * @var BlogBundle\Entity\Article $entityClass
     */
     private $entityClass;
 
@@ -46,17 +46,17 @@ class PostHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->om->expects($this->any())
              ->method('getRepository')
-             ->with($this->equalTo(static::POST_CLASS))
+             ->with($this->equalTo(static::Article_CLASS))
              ->will($this->returnValue($this->repository));
 
         $this->om->expects($this->any())
              ->method('getClassMetadata')
-             ->with($this->equalTo(static::POST_CLASS))
+             ->with($this->equalTo(static::Article_CLASS))
              ->will($this->returnValue($class));
 
         $class->expects($this->any())
               ->method('getName')
-              ->will($this->returnValue(static::POST_CLASS));
+              ->will($this->returnValue(static::Article_CLASS));
     }
 
     /**
@@ -66,17 +66,17 @@ class PostHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $offset = 1;
         $limit  = 2;
-        $posts  = $this->getPosts(2);
+        $articles  = $this->getArticles(2);
 
         $this->repository
              ->expects($this->once())
              ->method('findBy')
              ->with(array(), null, $limit, $offset)
-             ->will($this->returnValue($posts));
+             ->will($this->returnValue($articles));
 
-        $this->postHandler = $this->createPostHandler($this->om, static::POST_CLASS,  $this->formFactory);
-        $all = $this->postHandler->all($limit, $offset);
-        $this->assertEquals($posts, $all);
+        $this->ArticleHandler = $this->createArticleHandler($this->om, static::Article_CLASS,  $this->formFactory);
+        $all = $this->ArticleHandler->all($limit, $offset);
+        $this->assertEquals($articles, $all);
     }
 
     /**
@@ -85,30 +85,30 @@ class PostHandlerTest extends \PHPUnit_Framework_TestCase
     public function testGet()
     {
         $id     = 1;
-        $post   = $this->getPost();
+        $article   = $this->getArticle();
 
         $this->repository->expects($this->once())
              ->method('find')
              ->with($this->equalTo($id))
-             ->will($this->returnValue($post));
+             ->will($this->returnValue($article));
 
-        $this->postHandler = $this->createPostHandler($this->om, static::POST_CLASS,  $this->formFactory);
-        $this->postHandler->get($id);
+        $this->ArticleHandler = $this->createArticleHandler($this->om, static::Article_CLASS,  $this->formFactory);
+        $this->ArticleHandler->get($id);
     }
 
     /**
-     * Test post method.
+     * Test Article method.
      */
-    public function testPost()
+    public function testArticle()
     {
         $title      = 'title1';
         $content    = 'content1';
         $parameters = array('title' => $title, 'content' => $content);
-        $post       = $this->getPost();
+        $article       = $this->getArticle();
         $form       = $this->getMock('BlogBundle\Tests\FormInterface');
 
-        $post->setTitle($title);
-        $post->setContent($content);
+        $article->setTitle($title);
+        $article->setContent($content);
         $form->expects($this->once())
              ->method('submit')
              ->with($this->anything());
@@ -117,31 +117,31 @@ class PostHandlerTest extends \PHPUnit_Framework_TestCase
              ->will($this->returnValue(true));
         $form->expects($this->once())
              ->method('getData')
-             ->will($this->returnValue($post));
+             ->will($this->returnValue($article));
         $this->formFactory->expects($this->once())
              ->method('create')
              ->will($this->returnValue($form));
 
-        $this->postHandler = $this->createPostHandler($this->om, static::POST_CLASS,  $this->formFactory);
-        $postObject = $this->postHandler->post($parameters);
-        $this->assertEquals($postObject, $post);
+        $this->ArticleHandler = $this->createArticleHandler($this->om, static::Article_CLASS,  $this->formFactory);
+        $articleObject = $this->ArticleHandler->post($parameters);
+        $this->assertEquals($articleObject, $article);
     }
 
     /**
-    * Test invalid post method.
+    * Test invalid Article method.
     *
     * @expectedException BlogBundle\Exception\InvalidFormException
     */
-    public function testPostShouldRaiseException()
+    public function testArticleShouldRaiseException()
     {
         $title      = 'title1';
         $content    = 'content1';
         $parameters = array('title' => $title, 'content' => $content);
-        $post       = $this->getPost();
+        $article       = $this->getArticle();
         $form       = $this->getMock('BlogBundle\Tests\FormInterface');
 
-        $post->setTitle($title);
-        $post->setContent($content);
+        $article->setTitle($title);
+        $article->setContent($content);
         $form->expects($this->once())
              ->method('submit')
              ->with($this->anything());
@@ -152,8 +152,8 @@ class PostHandlerTest extends \PHPUnit_Framework_TestCase
              ->method('create')
              ->will($this->returnValue($form));
 
-        $this->postHandler = $this->createPostHandler($this->om, static::POST_CLASS,  $this->formFactory);
-        $this->postHandler->post($parameters);
+        $this->ArticleHandler = $this->createArticleHandler($this->om, static::Article_CLASS,  $this->formFactory);
+        $this->ArticleHandler->post($parameters);
     }
 
     /**
@@ -164,11 +164,11 @@ class PostHandlerTest extends \PHPUnit_Framework_TestCase
         $title      = 'title1';
         $content    = 'content1';
         $parameters = array('title' => $title, 'content' => $content);
-        $post       = $this->getPost();
+        $article       = $this->getArticle();
         $form       = $this->getMock('BlogBundle\Tests\FormInterface');
 
-        $post->setTitle($title);
-        $post->setContent($content);
+        $article->setTitle($title);
+        $article->setContent($content);
         $form->expects($this->once())
              ->method('submit')
              ->with($this->anything());
@@ -177,14 +177,14 @@ class PostHandlerTest extends \PHPUnit_Framework_TestCase
              ->will($this->returnValue(true));
         $form->expects($this->once())
              ->method('getData')
-             ->will($this->returnValue($post));
+             ->will($this->returnValue($article));
         $this->formFactory->expects($this->once())
              ->method('create')
              ->will($this->returnValue($form));
 
-        $this->postHandler = $this->createPostHandler($this->om, static::POST_CLASS,  $this->formFactory);
-        $postObject = $this->postHandler->put($post, $parameters);
-        $this->assertEquals($postObject, $post);
+        $this->ArticleHandler = $this->createArticleHandler($this->om, static::Article_CLASS,  $this->formFactory);
+        $articleObject = $this->ArticleHandler->put($article, $parameters);
+        $this->assertEquals($articleObject, $article);
     }
 
     /**
@@ -195,11 +195,11 @@ class PostHandlerTest extends \PHPUnit_Framework_TestCase
         $title      = 'title1';
         $content    = 'content1';
         $parameters = array('content' => $content);
-        $post       = $this->getPost();
+        $article       = $this->getArticle();
         $form       = $this->getMock('BlogBundle\Tests\FormInterface');
 
-        $post->setTitle($title);
-        $post->setContent($content);
+        $article->setTitle($title);
+        $article->setContent($content);
         $form->expects($this->once())
              ->method('submit')
              ->with($this->anything());
@@ -208,61 +208,61 @@ class PostHandlerTest extends \PHPUnit_Framework_TestCase
              ->will($this->returnValue(true));
         $form->expects($this->once())
              ->method('getData')
-             ->will($this->returnValue($post));
+             ->will($this->returnValue($article));
         $this->formFactory->expects($this->once())
              ->method('create')
              ->will($this->returnValue($form));
 
-        $this->postHandler = $this->createPostHandler($this->om, static::POST_CLASS,  $this->formFactory);
-        $postObject = $this->postHandler->patch($post, $parameters);
-        $this->assertEquals($postObject, $post);
+        $this->ArticleHandler = $this->createArticleHandler($this->om, static::Article_CLASS,  $this->formFactory);
+        $articleObject = $this->ArticleHandler->patch($article, $parameters);
+        $this->assertEquals($articleObject, $article);
     }
 
     /**
-     * Get the PostHandler.
+     * Get the ArticleHandler.
      *
      * @param ObjectManager $objectManager
-     * @param PostInterface $postClass
+     * @param ArticleInterface $articleClass
      * @param FormFactory   $formFactory
      *
-     * @return PostHandlerInterface
+     * @return ArticleHandlerInterface
      */
-    protected function createPostHandler($objectManager, $postClass, $formFactory)
+    protected function createArticleHandler($objectManager, $articleClass, $formFactory)
     {
-        return new PostHandler($objectManager, $postClass, $formFactory);
+        return new ArticleHandler($objectManager, $articleClass, $formFactory);
     }
 
     /**
-     * Get a new Post entity.
+     * Get a new Article entity.
      *
-     * @return PostInterface
+     * @return ArticleInterface
      */
-    protected function getPost()
+    protected function getArticle()
     {
-        $postClass = static::POST_CLASS;
+        $articleClass = static::Article_CLASS;
 
-        return new $postClass();
+        return new $articleClass();
     }
 
     /**
-     * Get a list of Posts.
+     * Get a list of Articles.
      *
-     * @param int $maxPosts The number of Posts to retrieve.
+     * @param int $maxArticles The number of Articles to retrieve.
      *
      * @return array
      */
-    protected function getPosts($maxPosts = 5)
+    protected function getArticles($maxArticles = 5)
     {
-        $posts = array();
+        $articles = array();
 
-        for ($i = 0; $i < $maxPosts; $i++) {
-            $posts[] = $this->getPost();
+        for ($i = 0; $i < $maxArticles; $i++) {
+            $articles[] = $this->getArticle();
         }
 
-        return $posts;
+        return $articles;
     }
 }
 
-class DummyPost extends Post
+class DummyArticle extends Article
 {
 }

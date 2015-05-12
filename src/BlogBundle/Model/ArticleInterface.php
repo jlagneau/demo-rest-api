@@ -2,13 +2,13 @@
 
 namespace BlogBundle\Model;
 
-interface PostInterface
+interface ArticleInterface
 {
     /**
     * Set title
     *
     * @param string $title
-    * @return PostInterface
+    * @return ArticleInterface
     */
     public function setTitle($title);
 
@@ -23,7 +23,7 @@ interface PostInterface
     * Set content
     *
     * @param string $content
-    * @return PostInterface
+    * @return ArticleInterface
     */
     public function setContent($content);
 
