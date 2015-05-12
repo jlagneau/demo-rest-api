@@ -26,10 +26,10 @@ class ArticleController extends FOSRestController
      *   }
      * )
      *
-     * @FOSRest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing Articles.")
-     * @FOSRest\QueryParam(name="limit", requirements="\d+", default="5", description="How many Articles to return.")
+     * @FOSRest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing articles.")
+     * @FOSRest\QueryParam(name="limit", requirements="\d+", default="5", description="How many articles to return.")
      *
-     * @FOSRest\View(templateVar="Articles")
+     * @FOSRest\View(templateVar="articles")
      *
      * @param Request               $request      the request object
      * @param ParamFetcherInterface $paramFetcher param fetcher service
@@ -45,25 +45,25 @@ class ArticleController extends FOSRestController
     }
 
     /**
-     * Get single Article,
+     * Get single article,
      *
      * @ApiDoc(
      *   resource = true,
-     *   description = "Gets a Article for a given id",
+     *   description = "Gets an article for a given id",
      *   output = "BlogBundle\Entity\Article",
      *   statusCodes = {
      *     200 = "Returned when successful",
-     *     404 = "Returned when the Article is not found"
+     *     404 = "Returned when the article does not exist"
      *   }
      * )
      *
-     * @FOSRest\View(templateVar="Article")
+     * @FOSRest\View(templateVar="article")
      *
      * @param Article $id the Article id
      *
      * @return array
      *
-     * @throws NotFoundHttpException when Article not exist
+     * @throws NotFoundHttpException when the article does not exist
      */
     public function getArticleAction(Article $id)
     {
@@ -75,14 +75,14 @@ class ArticleController extends FOSRestController
     }
 
     /**
-     * Create a Article from the submitted data.
+     * Create an article from the submitted data.
      *
      * @ApiDoc(
      *   resource = true,
-     *   description = "Creates a new Article from the submitted data.",
+     *   description = "Creates a new article from the submitted data.",
      *   input = "BlogBundle\Form\Type\ArticleType",
      *   statusCodes = {
-     *     201 = "Returned when the Article is created",
+     *     201 = "Returned when the article is created",
      *     400 = "Returned when the form has errors"
      *   }
      * )
@@ -114,26 +114,27 @@ class ArticleController extends FOSRestController
     }
 
     /**
-    * Update existing Article from the submitted data or create a new Article at a specific location.
+    * Update existing article from the submitted data or create a new article at a specific location.
     *
     * @ApiDoc(
     *   resource = true,
     *   input = "BlogBundle\Form\Type\ArticleType",
     *   statusCodes = {
-    *     201 = "Returned when the Article is created",
-    *     303 = "Returned when the Article is edited",
-    *     400 = "Returned when the form has errors"
+    *     201 = "Returned when the article is created",
+    *     303 = "Returned when the article is edited",
+    *     400 = "Returned when the form has errors",
+    *     404 = "Returned when the article does not exist"
     *   }
     * )
     *
     * @FOSRest\View(templateVar = "form")
     *
     * @param Request $request the request object
-    * @param int     $id      the Article id
+    * @param int     $id      the article id
     *
     * @return FormTypeInterface|View
     *
-    * @throws NotFoundHttpException when Article not exist
+    * @throws NotFoundHttpException when the article does not exist
     */
     public function putArticleAction(Request $request, $id)
     {
@@ -162,26 +163,26 @@ class ArticleController extends FOSRestController
     }
 
     /**
-    * Update partially an existing Article from the submitted data.
+    * Update partially an existing article from the submitted data.
     *
     * @ApiDoc(
     *   resource = true,
     *   input = "BlogBundle\Form\Type\ArticleType",
     *   statusCodes = {
-    *     204 = "Returned when the Article was successfully patched",
+    *     204 = "Returned when the article was successfully patched",
     *     400 = "Returned when the form has errors",
-    *     404 = "Returned when the Article does not exist"
+    *     404 = "Returned when the article does not exist"
     *   }
     * )
     *
     * @FOSRest\View(templateVar = "form")
     *
     * @param Request $request the request object
-    * @param Article    $id      the Article id
+    * @param Article $id      the article id
     *
     * @return FormTypeInterface|View
     *
-    * @throws NotFoundHttpException when Article not exist
+    * @throws NotFoundHttpException when the article does not exist
     */
     public function patchArticleAction(Request $request, Article $id)
     {
@@ -198,25 +199,25 @@ class ArticleController extends FOSRestController
     }
 
     /**
-    * Delete a single Article.
+    * Delete a single article.
     *
     * @ApiDoc(
     *   resource = true,
-    *   description = "Delete a Article for a given id.",
+    *   description = "Delete an article for a given id.",
     *   statusCodes = {
-    *     204 = "Returned when the Article was successfully deleted",
-    *     404 = "Returned when the Article does not exist"
+    *     204 = "Returned when the article was successfully deleted",
+    *     404 = "Returned when the article does not exist"
     *   }
     * )
     *
     * @FOSRest\View(templateVar = "data")
     *
     * @param Request $request the request object
-    * @param Article    $id      the Article id
+    * @param Article $id      the article id
     *
     * @return View
     *
-    * @throws NotFoundHttpException when Article not exist
+    * @throws NotFoundHttpException when the article does not exist
     */
     public function deleteArticleAction(Article $id)
     {
