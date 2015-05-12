@@ -49,7 +49,7 @@ class ArticleController extends FOSRestController
      *
      * @ApiDoc(
      *   resource = true,
-     *   description = "Gets an article for a given id",
+     *   description = "Get an article for a given id.",
      *   output = "BlogBundle\Entity\Article",
      *   statusCodes = {
      *     200 = "Returned when successful",
@@ -79,7 +79,7 @@ class ArticleController extends FOSRestController
      *
      * @ApiDoc(
      *   resource = true,
-     *   description = "Creates a new article from the submitted data.",
+     *   description = "Create a new article from the submitted data.",
      *   input = "BlogBundle\Form\Type\ArticleType",
      *   statusCodes = {
      *     201 = "Returned when the article is created",
@@ -122,8 +122,7 @@ class ArticleController extends FOSRestController
     *   statusCodes = {
     *     201 = "Returned when the article is created",
     *     303 = "Returned when the article is edited",
-    *     400 = "Returned when the form has errors",
-    *     404 = "Returned when the article does not exist"
+    *     400 = "Returned when the form has errors"
     *   }
     * )
     *
@@ -133,8 +132,6 @@ class ArticleController extends FOSRestController
     * @param int     $id      the article id
     *
     * @return FormTypeInterface|View
-    *
-    * @throws NotFoundHttpException when the article does not exist
     */
     public function putArticleAction(Request $request, $id)
     {
