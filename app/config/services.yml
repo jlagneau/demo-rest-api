@@ -7,9 +7,9 @@ services:
 #    service_name:
 #        class: BlogBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
-    post_handler:
-        class: BlogBundle\Handler\PostHandler
+    article_handler:
+        class: BlogBundle\Handler\ArticleHandler
         arguments:
             - "@doctrine.orm.entity_manager"
-            - BlogBundle\Entity\Post
+            - BlogBundle\Entity\Article
             - "@form.factory"

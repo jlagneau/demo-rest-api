@@ -1,7 +1,7 @@
 app::
     type:     rest
     prefix:   /v1
-    resource: BlogBundle\Controller\PostController
+    resource: BlogBundle\Controller\ArticleController
 
 appDoc:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"

@@ -4,12 +4,12 @@ namespace BlogBundle\Handler;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\FormFactoryInterface;
-use BlogBundle\Model\PostInterface;
-use BlogBundle\Model\PostHandlerInterface;
-use BlogBundle\Form\Type\PostType;
+use BlogBundle\Model\ArticleInterface;
+use BlogBundle\Model\ArticleHandlerInterface;
+use BlogBundle\Form\Type\ArticleType;
 use BlogBundle\Exception\InvalidFormException;
 
-class PostHandler implements PostHandlerInterface
+class ArticleHandler implements ArticleHandlerInterface
 {
     /**
      * @var Doctrine\Common\Persistence\ObjectManager $om
@@ -17,7 +17,7 @@ class PostHandler implements PostHandlerInterface
     private $om;
 
     /**
-     * @var BlogBundle\Entity\Post $entityClass
+     * @var BlogBundle\Entity\Article $entityClass
      */
     private $entityClass;
 
@@ -33,7 +33,7 @@ class PostHandler implements PostHandlerInterface
 
     /**
      * @param Doctrine\Common\Persistence\ObjectManager   $om
-     * @param BlogBundle\Entity\Post                      $entityClass
+     * @param BlogBundle\Entity\Article                      $entityClass
      * @param Symfony\Component\Form\FormFactoryInterface $formFactory
      */
     public function __construct(ObjectManager $om, $entityClass, FormFactoryInterface $formFactory)
@@ -58,11 +58,11 @@ class PostHandler implements PostHandlerInterface
     }
 
     /**
-     * Get a Post.
+     * Get a Article.
      *
      * @param mixed $id
      *
-     * @return PostInterface
+     * @return ArticleInterface
      */
     public function get($id)
     {
@@ -70,87 +70,87 @@ class PostHandler implements PostHandlerInterface
     }
 
     /**
-     * Create a new Post.
+     * Create a new Article.
      *
      * @param array $parameters
      *
-     * @return PostInterface
+     * @return ArticleInterface
      */
     public function post(array $parameters)
     {
-        $post = $this->createPost();
+        $article = $this->createArticle();
 
-        return $this->processForm($post, $parameters, 'POST');
+        return $this->processForm($article, $parameters, 'POST');
     }
 
     /**
-    * Edit a Post, or create if not exist.
+    * Edit a Article, or create if not exist.
     *
-    * @param PostInterface $post
+    * @param ArticleInterface $article
     * @param array         $parameters
     *
-    * @return PostInterface
+    * @return ArticleInterface
     */
-    public function put(PostInterface $post, array $parameters)
+    public function put(ArticleInterface $article, array $parameters)
     {
-        return $this->processForm($post, $parameters, 'PUT');
+        return $this->processForm($article, $parameters, 'PUT');
     }
 
     /**
-    * Partially update a Post.
+    * Partially update a Article.
     *
-    * @param PostInterface $post
+    * @param ArticleInterface $article
     * @param array         $parameters
     *
-    * @return PostInterface
+    * @return ArticleInterface
     */
-    public function patch(PostInterface $post, array $parameters)
+    public function patch(ArticleInterface $article, array $parameters)
     {
-        return $this->processForm($post, $parameters, 'PATCH');
+        return $this->processForm($article, $parameters, 'PATCH');
     }
 
     /**
-    * Delete a Post.
+    * Delete a Article.
     *
-    * @param PostInterface
+    * @param ArticleInterface
     */
-    public function delete(PostInterface $post)
+    public function delete(ArticleInterface $article)
     {
-        $this->om->remove($post);
-        $this->om->flush($post);
+        $this->om->remove($article);
+        $this->om->flush($article);
     }
 
     /**
      * Processes the form.
      *
-     * @param PostInterface $post
+     * @param ArticleInterface $article
      * @param array         $parameters
      * @param String        $method
      *
-     * @return PostInterface
+     * @return ArticleInterface
      *
      * @throws InvalidFormException
      */
-    private function processForm(PostInterface $post, array $parameters, $method = "PUT")
+    private function processForm(ArticleInterface $article, array $parameters, $method = "PUT")
     {
-        $form = $this->formFactory->create(new PostType(), $post, array('method' => $method));
+        $form = $this->formFactory->create(new ArticleType(), $article, array('method' => $method));
         $form->submit($parameters, 'PATCH' !== $method);
         if ($form->isValid()) {
-            $post = $form->getData();
-            $this->om->persist($post);
-            $this->om->flush($post);
+            $article = $form->getData();
+            $this->om->persist($article);
+            $this->om->flush($article);
 
-            return $post;
+            return $article;
         }
         throw new InvalidFormException('Invalid submitted data', $form);
     }
 
     /**
-     * Create a new Post.
+     * Create a new Article.
      *
-     * @return PostInterface
+     * @return ArticleInterface
      */
-    private function createPost()
+    private function createArticle()
     {
         return new $this->entityClass();
     }
