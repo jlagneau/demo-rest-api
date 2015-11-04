@@ -24,11 +24,11 @@ For development purpose, you can also load fixtures :
 
 Now you can start the server (for development only) :
 
-    $ php app/console server:run &
+    $ php app/console server:start
 
 ## API doc
 
-see [http://localhost:8000/app_dev.php/doc/](http://localhost:8000/app_dev.php/doc/).
+see [http://localhost:8000/app_dev.php/doc](http://localhost:8000/app_dev.php/doc) once the webserver is started.
 
 ## Tests
 
