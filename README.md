@@ -15,11 +15,14 @@ Inside the directory:
 
 Change configurations in `app/config/parameters.yml` if needed and run :
 
-	$ ./app/console doctrine:database:create
-	$ ./app/console doctrine:schema:create
-	$ ./app/console doctrine:fixtures:load
+	$ php app/console doctrine:database:create
+	$ php app/console doctrine:schema:create
 
-Now you can start the server (for developement only) :
+For development purpose, you can also load fixtures :
+
+	$ phpapp/console doctrine:fixtures:load
+
+Now you can start the server (for development only) :
 
     $ php app/console server:run &
 
