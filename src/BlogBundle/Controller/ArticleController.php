@@ -45,7 +45,7 @@ class ArticleController extends FOSRestController
     }
 
     /**
-     * Get single article,
+     * Get single article.
      *
      * @ApiDoc(
      *   resource = true,
