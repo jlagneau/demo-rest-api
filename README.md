@@ -6,6 +6,8 @@
 
 ---
 
+This is a simple symfony2 demo of a blog in REST
+
 ## Install and run
 
 Inside the directory:
@@ -20,7 +22,7 @@ Change configurations in `app/config/parameters.yml` if needed and run :
 
 For development purpose, you can also load fixtures :
 
-	$ phpapp/console doctrine:fixtures:load
+	$ php app/console doctrine:fixtures:load
 
 Now you can start the server (for development only) :
 
