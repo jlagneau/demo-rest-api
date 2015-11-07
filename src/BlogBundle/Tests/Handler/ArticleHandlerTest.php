@@ -10,28 +10,28 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
     const Article_CLASS = 'BlogBundle\Tests\Handler\DummyArticle';
 
     /**
-     * @var BlogBundle\Handler\ArticleHandler $articleHandler
+     * @var BlogBundle\Handler\ArticleHandler
      */
     private $articleHandler;
 
     /**
-    * @var Doctrine\Common\Persistence\ObjectManager $om
-    */
+     * @var Doctrine\Common\Persistence\ObjectManager
+     */
     private $om;
 
     /**
-    * @var BlogBundle\Entity\Article $entityClass
-    */
+     * @var BlogBundle\Entity\Article
+     */
     private $entityClass;
 
     /**
-    * @var Doctrine\ORM\EntityRepository $repository
-    */
+     * @var Doctrine\ORM\EntityRepository
+     */
     private $repository;
 
     /**
-    * @var Symfony\Component\Form\FormFactoryInterface $formFactory
-    */
+     * @var Symfony\Component\Form\FormFactoryInterface
+     */
     private $formFactory;
 
     /**
@@ -39,10 +39,10 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $class              = $this->getMock('Doctrine\Common\Persistence\Mapping\ClassMetadata');
-        $this->om           = $this->getMock('Doctrine\Common\Persistence\ObjectManager');
-        $this->repository   = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
-        $this->formFactory  = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+        $class = $this->getMock('Doctrine\Common\Persistence\Mapping\ClassMetadata');
+        $this->om = $this->getMock('Doctrine\Common\Persistence\ObjectManager');
+        $this->repository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
+        $this->formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
 
         $this->om->expects($this->any())
              ->method('getRepository')
@@ -65,8 +65,8 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
     public function testAll()
     {
         $offset = 1;
-        $limit  = 2;
-        $articles  = $this->getArticles(2);
+        $limit = 2;
+        $articles = $this->getArticles(2);
 
         $this->repository
              ->expects($this->once())
@@ -84,8 +84,8 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testGet()
     {
-        $id     = 1;
-        $article   = $this->getArticle();
+        $id = 1;
+        $article = $this->getArticle();
 
         $this->repository->expects($this->once())
              ->method('find')
@@ -101,11 +101,11 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testArticle()
     {
-        $title      = 'title1';
-        $content    = 'content1';
+        $title = 'title1';
+        $content = 'content1';
         $parameters = array('title' => $title, 'content' => $content);
-        $article       = $this->getArticle();
-        $form       = $this->getMock('BlogBundle\Tests\FormInterface');
+        $article = $this->getArticle();
+        $form = $this->getMock('BlogBundle\Tests\FormInterface');
 
         $article->setTitle($title);
         $article->setContent($content);
@@ -128,17 +128,17 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * Test invalid Article method.
-    *
-    * @expectedException BlogBundle\Exception\InvalidFormException
-    */
+     * Test invalid Article method.
+     *
+     * @expectedException BlogBundle\Exception\InvalidFormException
+     */
     public function testArticleShouldRaiseException()
     {
-        $title      = 'title1';
-        $content    = 'content1';
+        $title = 'title1';
+        $content = 'content1';
         $parameters = array('title' => $title, 'content' => $content);
-        $article       = $this->getArticle();
-        $form       = $this->getMock('BlogBundle\Tests\FormInterface');
+        $article = $this->getArticle();
+        $form = $this->getMock('BlogBundle\Tests\FormInterface');
 
         $article->setTitle($title);
         $article->setContent($content);
@@ -161,11 +161,11 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testPut()
     {
-        $title      = 'title1';
-        $content    = 'content1';
+        $title = 'title1';
+        $content = 'content1';
         $parameters = array('title' => $title, 'content' => $content);
-        $article       = $this->getArticle();
-        $form       = $this->getMock('BlogBundle\Tests\FormInterface');
+        $article = $this->getArticle();
+        $form = $this->getMock('BlogBundle\Tests\FormInterface');
 
         $article->setTitle($title);
         $article->setContent($content);
@@ -192,11 +192,11 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testPatch()
     {
-        $title      = 'title1';
-        $content    = 'content1';
+        $title = 'title1';
+        $content = 'content1';
         $parameters = array('content' => $content);
-        $article       = $this->getArticle();
-        $form       = $this->getMock('BlogBundle\Tests\FormInterface');
+        $article = $this->getArticle();
+        $form = $this->getMock('BlogBundle\Tests\FormInterface');
 
         $article->setTitle($title);
         $article->setContent($content);
@@ -221,9 +221,9 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
     /**
      * Get the ArticleHandler.
      *
-     * @param ObjectManager $objectManager
+     * @param ObjectManager    $objectManager
      * @param ArticleInterface $articleClass
-     * @param FormFactory   $formFactory
+     * @param FormFactory      $formFactory
      *
      * @return ArticleHandlerInterface
      */
@@ -255,7 +255,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $articles = array();
 
-        for ($i = 0; $i < $maxArticles; $i++) {
+        for ($i = 0; $i < $maxArticles; ++$i) {
             $articles[] = $this->getArticle();
         }
 

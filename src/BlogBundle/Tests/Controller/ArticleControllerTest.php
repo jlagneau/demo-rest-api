@@ -17,7 +17,7 @@ class ArticleControllerTest extends WebTestCase
         $fixtures = array('BlogBundle\Tests\Fixtures\Entity\LoadArticleData');
         $this->loadFixtures($fixtures);
         $articles = LoadArticleData::$articles;
-        $route =  $this->getUrl('api_v1_get_articles', array('_format' => 'json', 'limit' => 2));
+        $route = $this->getUrl('api_v1_get_articles', array('_format' => 'json', 'limit' => 2));
         $this->client->request('GET', $route);
         $response = $this->client->getResponse();
         $this->assertJsonResponse($response, Codes::HTTP_OK);
@@ -30,7 +30,7 @@ class ArticleControllerTest extends WebTestCase
             $this->assertTrue(isset($article['content']));
         }
         $article = array_pop($articles);
-        $route =  $this->getUrl('api_v1_get_article', array('id' => $article->getId(), '_format' => 'json'));
+        $route = $this->getUrl('api_v1_get_article', array('id' => $article->getId(), '_format' => 'json'));
         $this->client->request('GET', $route);
         $response = $this->client->getResponse();
         $this->assertJsonResponse($response, Codes::HTTP_OK);
@@ -42,15 +42,15 @@ class ArticleControllerTest extends WebTestCase
     }
 
     /**
-    * Test HEAD HTTP method.
-    */
+     * Test HEAD HTTP method.
+     */
     public function testHead()
     {
         $this->client = static::createClient();
-        $fixtures     = array('BlogBundle\Tests\Fixtures\Entity\LoadArticleData');
+        $fixtures = array('BlogBundle\Tests\Fixtures\Entity\LoadArticleData');
         $this->loadFixtures($fixtures);
-        $articles      = LoadArticleData::$articles;
-        $article       = array_pop($articles);
+        $articles = LoadArticleData::$articles;
+        $article = array_pop($articles);
 
         $this->client->request(
             'HEAD',
@@ -74,8 +74,8 @@ class ArticleControllerTest extends WebTestCase
     }
 
     /**
-    * Test POST HTTP method.
-    */
+     * Test POST HTTP method.
+     */
     public function testJsonPost()
     {
         $this->client = static::createClient();
@@ -93,8 +93,8 @@ class ArticleControllerTest extends WebTestCase
     }
 
     /**
-    * Test POST HTTP method with bad parameters.
-    */
+     * Test POST HTTP method with bad parameters.
+     */
     public function testJsonPostBadParameters()
     {
         $this->client = static::createClient();
@@ -104,7 +104,7 @@ class ArticleControllerTest extends WebTestCase
             '/v1/articles.json',
             array(),
             array(),
-            array('CONTENT_TYPE'  => 'application/json'),
+            array('CONTENT_TYPE' => 'application/json'),
             '{"foo":"bar"}'
         );
 
@@ -112,15 +112,15 @@ class ArticleControllerTest extends WebTestCase
     }
 
     /**
-    * Test PUT HTTP method when modifying.
-    */
+     * Test PUT HTTP method when modifying.
+     */
     public function testJsonPutModify()
     {
-        $this->client   = static::createClient();
-        $fixtures       = array('BlogBundle\Tests\Fixtures\Entity\LoadArticleData');
+        $this->client = static::createClient();
+        $fixtures = array('BlogBundle\Tests\Fixtures\Entity\LoadArticleData');
         $this->loadFixtures($fixtures);
-        $articles       = LoadArticleData::$articles;
-        $article        = array_pop($articles);
+        $articles = LoadArticleData::$articles;
+        $article = array_pop($articles);
 
         $this->client->request(
             'GET',
@@ -135,7 +135,7 @@ class ArticleControllerTest extends WebTestCase
             sprintf('/v1/articles/%d.json', $article->getId()),
             array(),
             array(),
-            array('CONTENT_TYPE'  => 'application/json'),
+            array('CONTENT_TYPE' => 'application/json'),
             '{"title":"foobar","content":"foobar"}'
         );
 
@@ -150,8 +150,8 @@ class ArticleControllerTest extends WebTestCase
     }
 
     /**
-    * Test PUT HTTP method when creating.
-    */
+     * Test PUT HTTP method when creating.
+     */
     public function testJsonPutCreate()
     {
         $id = 0;
@@ -170,7 +170,7 @@ class ArticleControllerTest extends WebTestCase
             sprintf('/v1/articles/%d.json', $id),
             array(),
             array(),
-            array('CONTENT_TYPE'  => 'application/json'),
+            array('CONTENT_TYPE' => 'application/json'),
             '{"title":"barfoo","content":"barfoo"}'
         );
 
@@ -178,8 +178,8 @@ class ArticleControllerTest extends WebTestCase
     }
 
     /**
-    * Test PUT HTTP method with bad parameters.
-    */
+     * Test PUT HTTP method with bad parameters.
+     */
     public function testJsonPutBadParameters()
     {
         $id = 0;
@@ -190,7 +190,7 @@ class ArticleControllerTest extends WebTestCase
             sprintf('/v1/articles/%d.json', $id),
             array(),
             array(),
-            array('CONTENT_TYPE'  => 'application/json'),
+            array('CONTENT_TYPE' => 'application/json'),
             '{"bar":"foo"}'
         );
 
@@ -198,8 +198,8 @@ class ArticleControllerTest extends WebTestCase
     }
 
     /**
-    * Test PATCH HTTP method.
-    */
+     * Test PATCH HTTP method.
+     */
     public function testJsonPatch()
     {
         $this->client = static::createClient();
@@ -212,15 +212,15 @@ class ArticleControllerTest extends WebTestCase
             sprintf('/v1/articles/%d.json', $article->getId()),
             array(),
             array(),
-            array('CONTENT_TYPE'  => 'application/json', 'ACCEPT' => 'application/json'),
+            array('CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json'),
             '{"content":"def"}'
         );
         $this->assertEquals($this->client->getResponse()->getStatusCode(), Codes::HTTP_NO_CONTENT);
     }
 
     /**
-    * Test PATCH HTTP method with bad parameters.
-    */
+     * Test PATCH HTTP method with bad parameters.
+     */
     public function testJsonPatchBadParameters()
     {
         $this->client = static::createClient();
@@ -233,43 +233,43 @@ class ArticleControllerTest extends WebTestCase
             sprintf('/v1/articles/%d.json', $article->getId()),
             array(),
             array(),
-            array('CONTENT_TYPE'  => 'application/json'),
+            array('CONTENT_TYPE' => 'application/json'),
             '{"foobar":"foobar"}'
         );
         $this->assertJsonResponse($this->client->getResponse(), Codes::HTTP_BAD_REQUEST);
     }
 
     /**
-    * Test DELETE HTTP method.
-    */
+     * Test DELETE HTTP method.
+     */
     public function testDelete()
     {
         $this->client = static::createClient();
         $fixtures = array('BlogBundle\Tests\Fixtures\Entity\LoadArticleData');
         $this->loadFixtures($fixtures);
         $article = array_pop(LoadArticleData::$articles);
-        $route =  $this->getUrl('api_v1_get_article', array('id' => $article->getId(), '_format' => 'json'));
+        $route = $this->getUrl('api_v1_get_article', array('id' => $article->getId(), '_format' => 'json'));
         $this->client->request('DELETE', $route);
         $response = $this->client->getResponse();
         $this->assertEquals($this->client->getResponse()->getStatusCode(), Codes::HTTP_NO_CONTENT);
     }
 
     /**
-    * Test DELETE HTTP method when not found.
-    */
+     * Test DELETE HTTP method when not found.
+     */
     public function testDeleteNotFound()
     {
         $id = 0;
         $this->client = static::createClient();
-        $route =  $this->getUrl('api_v1_get_article', array('id' => $id, '_format' => 'json'));
+        $route = $this->getUrl('api_v1_get_article', array('id' => $id, '_format' => 'json'));
         $this->client->request('DELETE', $route);
         $response = $this->client->getResponse();
         $this->assertJsonResponse($response, Codes::HTTP_NOT_FOUND);
     }
 
     /**
-    * Assert that response was correctly formatted in JSON.
-    */
+     * Assert that response was correctly formatted in JSON.
+     */
     protected function assertJsonResponse($response, $statusCode = Codes::HTTP_OK, $checkValidJson = true, $contentType = 'application/json')
     {
         $this->assertEquals(

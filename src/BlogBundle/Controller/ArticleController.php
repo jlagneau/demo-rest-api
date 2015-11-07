@@ -103,8 +103,8 @@ class ArticleController extends FOSRestController
                 $request->request->all()
             );
             $routeOptions = array(
-                'id'        => $newArticle->getId(),
-                '_format'   => $request->get('_format'),
+                'id' => $newArticle->getId(),
+                '_format' => $request->get('_format'),
             );
 
             return $this->routeRedirectView('api_v1_get_article', $routeOptions, Codes::HTTP_CREATED);
@@ -114,25 +114,25 @@ class ArticleController extends FOSRestController
     }
 
     /**
-    * Update existing article from the submitted data or create a new article at a specific location.
-    *
-    * @ApiDoc(
-    *   resource = true,
-    *   input = "BlogBundle\Form\Type\ArticleType",
-    *   statusCodes = {
-    *     201 = "Returned when the article is created",
-    *     303 = "Returned when the article is edited",
-    *     400 = "Returned when the form has errors"
-    *   }
-    * )
-    *
-    * @FOSRest\View(templateVar = "form")
-    *
-    * @param Request $request the request object
-    * @param int     $id      the article id
-    *
-    * @return FormTypeInterface|View
-    */
+     * Update existing article from the submitted data or create a new article at a specific location.
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   input = "BlogBundle\Form\Type\ArticleType",
+     *   statusCodes = {
+     *     201 = "Returned when the article is created",
+     *     303 = "Returned when the article is edited",
+     *     400 = "Returned when the form has errors"
+     *   }
+     * )
+     *
+     * @FOSRest\View(templateVar = "form")
+     *
+     * @param Request $request the request object
+     * @param int     $id      the article id
+     *
+     * @return FormTypeInterface|View
+     */
     public function putArticleAction(Request $request, $id)
     {
         try {
@@ -149,8 +149,8 @@ class ArticleController extends FOSRestController
                 );
             }
             $routeOptions = array(
-                'id'        => $article->getId(),
-                '_format'   => $request->get('_format'),
+                'id' => $article->getId(),
+                '_format' => $request->get('_format'),
             );
 
             return $this->routeRedirectView('api_v1_get_article', $routeOptions, $statusCode);
@@ -160,27 +160,27 @@ class ArticleController extends FOSRestController
     }
 
     /**
-    * Update partially an existing article from the submitted data.
-    *
-    * @ApiDoc(
-    *   resource = true,
-    *   input = "BlogBundle\Form\Type\ArticleType",
-    *   statusCodes = {
-    *     204 = "Returned when the article was successfully patched",
-    *     400 = "Returned when the form has errors",
-    *     404 = "Returned when the article does not exist"
-    *   }
-    * )
-    *
-    * @FOSRest\View(templateVar = "form")
-    *
-    * @param Request $request the request object
-    * @param Article $id      the article id
-    *
-    * @return FormTypeInterface|View
-    *
-    * @throws NotFoundHttpException when the article does not exist
-    */
+     * Update partially an existing article from the submitted data.
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   input = "BlogBundle\Form\Type\ArticleType",
+     *   statusCodes = {
+     *     204 = "Returned when the article was successfully patched",
+     *     400 = "Returned when the form has errors",
+     *     404 = "Returned when the article does not exist"
+     *   }
+     * )
+     *
+     * @FOSRest\View(templateVar = "form")
+     *
+     * @param Request $request the request object
+     * @param Article $id      the article id
+     *
+     * @return FormTypeInterface|View
+     *
+     * @throws NotFoundHttpException when the article does not exist
+     */
     public function patchArticleAction(Request $request, Article $id)
     {
         try {
@@ -196,26 +196,26 @@ class ArticleController extends FOSRestController
     }
 
     /**
-    * Delete a single article.
-    *
-    * @ApiDoc(
-    *   resource = true,
-    *   description = "Delete an article for a given id.",
-    *   statusCodes = {
-    *     204 = "Returned when the article was successfully deleted",
-    *     404 = "Returned when the article does not exist"
-    *   }
-    * )
-    *
-    * @FOSRest\View(templateVar = "data")
-    *
-    * @param Request $request the request object
-    * @param Article $id      the article id
-    *
-    * @return View
-    *
-    * @throws NotFoundHttpException when the article does not exist
-    */
+     * Delete a single article.
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Delete an article for a given id.",
+     *   statusCodes = {
+     *     204 = "Returned when the article was successfully deleted",
+     *     404 = "Returned when the article does not exist"
+     *   }
+     * )
+     *
+     * @FOSRest\View(templateVar = "data")
+     *
+     * @param Request $request the request object
+     * @param Article $id      the article id
+     *
+     * @return View
+     *
+     * @throws NotFoundHttpException when the article does not exist
+     */
     public function deleteArticleAction(Article $id)
     {
         $article = $this->container->get('article_handler')->delete(
