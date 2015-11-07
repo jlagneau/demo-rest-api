@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use BlogBundle\Model\ArticleInterface;
 
 /**
- * Article
+ * Article.
  *
  * @ORM\Table()
  * @ORM\Entity
@@ -15,7 +15,7 @@ use BlogBundle\Model\ArticleInterface;
 class Article implements ArticleInterface
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -50,9 +50,9 @@ class Article implements ArticleInterface
     private $content;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -60,9 +60,10 @@ class Article implements ArticleInterface
     }
 
     /**
-     * Set title
+     * Set title.
      *
-     * @param  string $title
+     * @param string $title
+     *
      * @return Article
      */
     public function setTitle($title)
@@ -73,7 +74,7 @@ class Article implements ArticleInterface
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -83,9 +84,10 @@ class Article implements ArticleInterface
     }
 
     /**
-     * Set content
+     * Set content.
      *
-     * @param  string $content
+     * @param string $content
+     *
      * @return Article
      */
     public function setContent($content)
@@ -96,7 +98,7 @@ class Article implements ArticleInterface
     }
 
     /**
-     * Get content
+     * Get content.
      *
      * @return string
      */

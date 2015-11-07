@@ -1,21 +1,22 @@
 <?php
+
 namespace BlogBundle\Model;
 
 interface ArticleHandlerInterface
 {
     /**
-    * Get a Article given the identifier
-    *
-    * @api
-    *
-    * @param mixed $id
-    *
-    * @return ArticleInterface
-    */
+     * Get a Article given the identifier.
+     *
+     * @api
+     *
+     * @param mixed $id
+     *
+     * @return ArticleInterface
+     */
     public function get($id);
 
     /**
-     * Create a new Article
+     * Create a new Article.
      *
      * @api
      *
@@ -31,7 +32,7 @@ interface ArticleHandlerInterface
      * @api
      *
      * @param ArticleInterface $article
-     * @param array         $parameters
+     * @param array            $parameters
      *
      * @return ArticleInterface
      */
@@ -43,7 +44,7 @@ interface ArticleHandlerInterface
      * @api
      *
      * @param ArticleInterface $article
-     * @param array         $parameters
+     * @param array            $parameters
      *
      * @return ArticleInterface
      */

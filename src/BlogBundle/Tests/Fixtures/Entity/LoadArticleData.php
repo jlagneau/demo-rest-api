@@ -10,7 +10,7 @@ use BlogBundle\Model\ArticleInterface;
 class LoadArticleData implements FixtureInterface
 {
     /**
-     * @var array $article
+     * @var array
      */
     public static $articles = array();
 

@@ -13,8 +13,8 @@ class InvalidFormException extends \RuntimeException
     }
 
     /**
-    * @return array|null
-    */
+     * @return array|null
+     */
     public function getForm()
     {
         return $this->form;

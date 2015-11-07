@@ -12,36 +12,36 @@ use BlogBundle\Exception\InvalidFormException;
 class ArticleHandler implements ArticleHandlerInterface
 {
     /**
-     * @var Doctrine\Common\Persistence\ObjectManager $om
+     * @var Doctrine\Common\Persistence\ObjectManager
      */
     private $om;
 
     /**
-     * @var BlogBundle\Entity\Article $entityClass
+     * @var BlogBundle\Entity\Article
      */
     private $entityClass;
 
     /**
-     * @var Doctrine\ORM\EntityRepository $repository
+     * @var Doctrine\ORM\EntityRepository
      */
     private $repository;
 
     /**
-     * @var Symfony\Component\Form\FormFactoryInterface $formFactory
+     * @var Symfony\Component\Form\FormFactoryInterface
      */
     private $formFactory;
 
     /**
      * @param Doctrine\Common\Persistence\ObjectManager   $om
-     * @param BlogBundle\Entity\Article                      $entityClass
+     * @param BlogBundle\Entity\Article                   $entityClass
      * @param Symfony\Component\Form\FormFactoryInterface $formFactory
      */
     public function __construct(ObjectManager $om, $entityClass, FormFactoryInterface $formFactory)
     {
-        $this->om           = $om;
-        $this->entityClass  = $entityClass;
-        $this->repository   = $this->om->getRepository($this->entityClass);
-        $this->formFactory  = $formFactory;
+        $this->om = $om;
+        $this->entityClass = $entityClass;
+        $this->repository = $this->om->getRepository($this->entityClass);
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -84,36 +84,36 @@ class ArticleHandler implements ArticleHandlerInterface
     }
 
     /**
-    * Edit a Article, or create if not exist.
-    *
-    * @param ArticleInterface $article
-    * @param array         $parameters
-    *
-    * @return ArticleInterface
-    */
+     * Edit a Article, or create if not exist.
+     *
+     * @param ArticleInterface $article
+     * @param array            $parameters
+     *
+     * @return ArticleInterface
+     */
     public function put(ArticleInterface $article, array $parameters)
     {
         return $this->processForm($article, $parameters, 'PUT');
     }
 
     /**
-    * Partially update a Article.
-    *
-    * @param ArticleInterface $article
-    * @param array         $parameters
-    *
-    * @return ArticleInterface
-    */
+     * Partially update a Article.
+     *
+     * @param ArticleInterface $article
+     * @param array            $parameters
+     *
+     * @return ArticleInterface
+     */
     public function patch(ArticleInterface $article, array $parameters)
     {
         return $this->processForm($article, $parameters, 'PATCH');
     }
 
     /**
-    * Delete a Article.
-    *
-    * @param ArticleInterface
-    */
+     * Delete a Article.
+     *
+     * @param ArticleInterface
+     */
     public function delete(ArticleInterface $article)
     {
         $this->om->remove($article);
@@ -124,14 +124,14 @@ class ArticleHandler implements ArticleHandlerInterface
      * Processes the form.
      *
      * @param ArticleInterface $article
-     * @param array         $parameters
-     * @param String        $method
+     * @param array            $parameters
+     * @param String           $method
      *
      * @return ArticleInterface
      *
      * @throws InvalidFormException
      */
-    private function processForm(ArticleInterface $article, array $parameters, $method = "PUT")
+    private function processForm(ArticleInterface $article, array $parameters, $method = 'PUT')
     {
         $form = $this->formFactory->create(new ArticleType(), $article, array('method' => $method));
         $form->submit($parameters, 'PATCH' !== $method);
