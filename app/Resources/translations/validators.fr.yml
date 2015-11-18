@@ -1,7 +1,8 @@
 blog_bundle:
   article:
-    title.not_blank: "Le titre de l'article de ne peut pas être vide"
-    title.min_message: "Le titre de l'article doit faire au moins {{ limit }} caractères"
-    title.max_message: "Le titre de l'article ne doit pas dépasser les {{ limit }} caractères"
-    content.not_blank: "Le contenu de l'article ne peut pas être vide"
-    content.min_message: "Le contenu de l'article doit faire au moins {{ limit }} caracters"
+    extra_fields: "L'article ne possède pas les champs suivants (\"{{ extra_fields }}\")."
+    title.not_blank: "Le titre de l'article de ne peut pas être vide."
+    title.min_message: "Le titre de l'article doit faire au moins {{ limit }} caractères."
+    title.max_message: "Le titre de l'article ne doit pas dépasser les {{ limit }} caractères."
+    content.not_blank: "Le contenu de l'article ne peut pas être vide."
+    content.min_message: "Le contenu de l'article doit faire au moins {{ limit }} caracters."
