@@ -1,0 +1,7 @@
+blog_bundle:
+  article:
+    title.not_blank: "Article title cannot be empty"
+    title.min_message: "Article title must be at least {{ limit }} characters long"
+    title.max_message: "Article title cannot be longer than {{ limit }} characters long"
+    content.not_blank: "Article content cannot be empty"
+    content.min_message: "Article content must be at least {{ limit }} characters long"
