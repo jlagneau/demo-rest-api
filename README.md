@@ -20,10 +20,6 @@ Change configurations in `app/config/parameters.yml` if needed and run :
 	$ php app/console doctrine:database:create
 	$ php app/console doctrine:schema:create
 
-For development purpose, you can also load fixtures :
-
-	$ php app/console doctrine:fixtures:load
-
 Now you can start the server (for development only) :
 
     $ php app/console server:start

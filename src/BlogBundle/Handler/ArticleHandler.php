@@ -54,7 +54,7 @@ class ArticleHandler implements ArticleHandlerInterface
      */
     public function all($limit = 5, $offset = 0, $orderby = null)
     {
-        return $this->repository->findBy(array(), $orderby, $limit, $offset);
+        return $this->repository->findBy([], $orderby, $limit, $offset);
     }
 
     /**
@@ -133,7 +133,7 @@ class ArticleHandler implements ArticleHandlerInterface
      */
     private function processForm(ArticleInterface $article, array $parameters, $method = 'PUT')
     {
-        $form = $this->formFactory->create(new ArticleType(), $article, array('method' => $method));
+        $form = $this->formFactory->create(new ArticleType(), $article, ['method' => $method]);
         $form->submit($parameters, 'PATCH' !== $method);
         if ($form->isValid()) {
             $article = $form->getData();

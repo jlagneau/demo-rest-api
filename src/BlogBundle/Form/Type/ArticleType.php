@@ -25,11 +25,11 @@ class ArticleType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'BlogBundle\Entity\Article',
             'csrf_protection' => false,
             'extra_fields_message' => 'blog_bundle.article.extra_fields',
-        ));
+        ]);
     }
 
     /**
