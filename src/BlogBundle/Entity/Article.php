@@ -26,12 +26,14 @@ class Article implements ArticleInterface
     /**
      * @var string
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(
+     *      message = "blog_bundle.article.title.not_blank"
+     * )
      * @Assert\Length(
      *      min = 3,
      *      max = 255,
-     *      minMessage = "Your title must be at least {{ limit }} characters long",
-     *      maxMessage = "Your title cannot be longer than {{ limit }} characters long"
+     *      minMessage = "blog_bundle.article.title.min_message",
+     *      maxMessage = "blog_bundle.article.title.max_message"
      * )
      * @ORM\Column(name="title", type="string", length=255)
      */
@@ -40,10 +42,12 @@ class Article implements ArticleInterface
     /**
      * @var string
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(
+     *      message = "blog_bundle.article.content.not_blank"
+     * )
      * @Assert\Length(
      *      min = 3,
-     *      minMessage = "Your content must be at least {{ limit }} characters long"
+     *      minMessage = "blog_bundle.article.content.min_message"
      * )
      * @ORM\Column(name="content", type="text")
      */
