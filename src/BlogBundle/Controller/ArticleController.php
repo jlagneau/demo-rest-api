@@ -41,7 +41,7 @@ class ArticleController extends FOSRestController
         $offset = $paramFetcher->get('offset') === null ? 0 : $paramFetcher->get('offset');
         $limit = $paramFetcher->get('limit');
 
-        return $this->container->get('article_handler')->all($limit, $offset);
+        return $this->container->get('article_handler')->all($limit, $offset, ['id' => 'desc']);
     }
 
     /**
@@ -102,10 +102,10 @@ class ArticleController extends FOSRestController
             $newArticle = $this->container->get('article_handler')->post(
                 $request->request->all()
             );
-            $routeOptions = array(
+            $routeOptions = [
                 'id' => $newArticle->getId(),
                 '_format' => $request->get('_format'),
-            );
+            ];
 
             return $this->routeRedirectView('api_v1_get_article', $routeOptions, Codes::HTTP_CREATED);
         } catch (InvalidFormException $exception) {
@@ -148,10 +148,10 @@ class ArticleController extends FOSRestController
                     $request->request->all()
                 );
             }
-            $routeOptions = array(
+            $routeOptions = [
                 'id' => $article->getId(),
                 '_format' => $request->get('_format'),
-            );
+            ];
 
             return $this->routeRedirectView('api_v1_get_article', $routeOptions, $statusCode);
         } catch (InvalidFormException $exception) {

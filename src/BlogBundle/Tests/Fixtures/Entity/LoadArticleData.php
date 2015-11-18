@@ -43,9 +43,9 @@ class LoadArticleData implements FixtureInterface
     {
         static $i = 1;
         $article = new Article();
-        $article->setTitle('title ' . $i);
-        $article->setContent('content ' . $i);
-        $i++;
+        $article->setTitle('title '.$i);
+        $article->setContent('content '.$i);
+        ++$i;
 
         return $article;
     }

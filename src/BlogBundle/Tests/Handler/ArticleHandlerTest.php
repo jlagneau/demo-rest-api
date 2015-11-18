@@ -71,7 +71,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
         $this->repository
              ->expects($this->once())
              ->method('findBy')
-             ->with(array(), null, $limit, $offset)
+             ->with([], null, $limit, $offset)
              ->will($this->returnValue($articles));
 
         $this->ArticleHandler = $this->createArticleHandler($this->om, static::Article_CLASS,  $this->formFactory);
@@ -103,7 +103,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $title = 'title1';
         $content = 'content1';
-        $parameters = array('title' => $title, 'content' => $content);
+        $parameters = ['title' => $title, 'content' => $content];
         $article = $this->getArticle();
         $form = $this->getMock('BlogBundle\Tests\FormInterface');
 
@@ -136,7 +136,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $title = 'title1';
         $content = 'content1';
-        $parameters = array('title' => $title, 'content' => $content);
+        $parameters = ['title' => $title, 'content' => $content];
         $article = $this->getArticle();
         $form = $this->getMock('BlogBundle\Tests\FormInterface');
 
@@ -163,7 +163,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $title = 'title1';
         $content = 'content1';
-        $parameters = array('title' => $title, 'content' => $content);
+        $parameters = ['title' => $title, 'content' => $content];
         $article = $this->getArticle();
         $form = $this->getMock('BlogBundle\Tests\FormInterface');
 
@@ -194,7 +194,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $title = 'title1';
         $content = 'content1';
-        $parameters = array('content' => $content);
+        $parameters = ['content' => $content];
         $article = $this->getArticle();
         $form = $this->getMock('BlogBundle\Tests\FormInterface');
 
@@ -253,7 +253,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
      */
     protected function getArticles($maxArticles = 5)
     {
-        $articles = array();
+        $articles = [];
 
         for ($i = 0; $i < $maxArticles; ++$i) {
             $articles[] = $this->getArticle();

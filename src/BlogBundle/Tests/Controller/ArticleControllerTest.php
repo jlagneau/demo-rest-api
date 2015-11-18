@@ -14,10 +14,10 @@ class ArticleControllerTest extends WebTestCase
     public function testGet()
     {
         $this->client = static::createClient();
-        $fixtures = array('BlogBundle\Tests\Fixtures\Entity\LoadArticleData');
+        $fixtures = ['BlogBundle\Tests\Fixtures\Entity\LoadArticleData'];
         $this->loadFixtures($fixtures);
         $articles = LoadArticleData::$articles;
-        $route = $this->getUrl('api_v1_get_articles', array('_format' => 'json', 'limit' => 2));
+        $route = $this->getUrl('api_v1_get_articles', ['_format' => 'json', 'limit' => 2]);
         $this->client->request('GET', $route);
         $response = $this->client->getResponse();
         $this->assertJsonResponse($response, Codes::HTTP_OK);
@@ -30,7 +30,7 @@ class ArticleControllerTest extends WebTestCase
             $this->assertTrue(isset($article['content']));
         }
         $article = array_pop($articles);
-        $route = $this->getUrl('api_v1_get_article', array('id' => $article->getId(), '_format' => 'json'));
+        $route = $this->getUrl('api_v1_get_article', ['id' => $article->getId(), '_format' => 'json']);
         $this->client->request('GET', $route);
         $response = $this->client->getResponse();
         $this->assertJsonResponse($response, Codes::HTTP_OK);
@@ -47,7 +47,7 @@ class ArticleControllerTest extends WebTestCase
     public function testHead()
     {
         $this->client = static::createClient();
-        $fixtures = array('BlogBundle\Tests\Fixtures\Entity\LoadArticleData');
+        $fixtures = ['BlogBundle\Tests\Fixtures\Entity\LoadArticleData'];
         $this->loadFixtures($fixtures);
         $articles = LoadArticleData::$articles;
         $article = array_pop($articles);
@@ -55,7 +55,7 @@ class ArticleControllerTest extends WebTestCase
         $this->client->request(
             'HEAD',
             sprintf('/v1/articles/%d.json', $article->getId()),
-            array('ACCEPT' => 'application/json')
+            ['ACCEPT' => 'application/json']
         );
         $response = $this->client->getResponse();
 
@@ -65,7 +65,7 @@ class ArticleControllerTest extends WebTestCase
         $this->client->request(
             'HEAD',
             '/v1/articles.json',
-            array('ACCEPT' => 'application/json')
+            ['ACCEPT' => 'application/json']
         );
         $response = $this->client->getResponse();
 
@@ -83,9 +83,9 @@ class ArticleControllerTest extends WebTestCase
         $this->client->request(
             'POST',
             '/v1/articles.json',
-            array(),
-            array(),
-            array('CONTENT_TYPE' => 'application/json'),
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
             '{"title":"foo","content":"bar"}'
         );
 
@@ -102,9 +102,9 @@ class ArticleControllerTest extends WebTestCase
         $this->client->request(
             'POST',
             '/v1/articles.json',
-            array(),
-            array(),
-            array('CONTENT_TYPE' => 'application/json'),
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
             '{"foo":"bar"}'
         );
 
@@ -117,7 +117,7 @@ class ArticleControllerTest extends WebTestCase
     public function testJsonPutModify()
     {
         $this->client = static::createClient();
-        $fixtures = array('BlogBundle\Tests\Fixtures\Entity\LoadArticleData');
+        $fixtures = ['BlogBundle\Tests\Fixtures\Entity\LoadArticleData'];
         $this->loadFixtures($fixtures);
         $articles = LoadArticleData::$articles;
         $article = array_pop($articles);
@@ -125,7 +125,7 @@ class ArticleControllerTest extends WebTestCase
         $this->client->request(
             'GET',
             sprintf('/v1/articles/%d.json', $article->getId()),
-            array('ACCEPT' => 'application/json')
+            ['ACCEPT' => 'application/json']
         );
 
         $this->assertEquals(Codes::HTTP_OK, $this->client->getResponse()->getStatusCode(), $this->client->getResponse()->getContent());
@@ -133,9 +133,9 @@ class ArticleControllerTest extends WebTestCase
         $this->client->request(
             'PUT',
             sprintf('/v1/articles/%d.json', $article->getId()),
-            array(),
-            array(),
-            array('CONTENT_TYPE' => 'application/json'),
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
             '{"title":"foobar","content":"foobar"}'
         );
 
@@ -160,7 +160,7 @@ class ArticleControllerTest extends WebTestCase
         $this->client->request(
             'GET',
             sprintf('/v1/articles/%d.json', $id),
-            array('ACCEPT' => 'application/json')
+            ['ACCEPT' => 'application/json']
         );
 
         $this->assertEquals(404, $this->client->getResponse()->getStatusCode(), $this->client->getResponse()->getContent());
@@ -168,9 +168,9 @@ class ArticleControllerTest extends WebTestCase
         $this->client->request(
             'PUT',
             sprintf('/v1/articles/%d.json', $id),
-            array(),
-            array(),
-            array('CONTENT_TYPE' => 'application/json'),
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
             '{"title":"barfoo","content":"barfoo"}'
         );
 
@@ -188,9 +188,9 @@ class ArticleControllerTest extends WebTestCase
         $this->client->request(
             'PUT',
             sprintf('/v1/articles/%d.json', $id),
-            array(),
-            array(),
-            array('CONTENT_TYPE' => 'application/json'),
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
             '{"bar":"foo"}'
         );
 
@@ -203,16 +203,16 @@ class ArticleControllerTest extends WebTestCase
     public function testJsonPatch()
     {
         $this->client = static::createClient();
-        $fixtures = array('BlogBundle\Tests\Fixtures\Entity\LoadArticleData');
+        $fixtures = ['BlogBundle\Tests\Fixtures\Entity\LoadArticleData'];
         $this->loadFixtures($fixtures);
         $articles = LoadArticleData::$articles;
         $article = array_pop($articles);
         $this->client->request(
             'PATCH',
             sprintf('/v1/articles/%d.json', $article->getId()),
-            array(),
-            array(),
-            array('CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json'),
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json'],
             '{"content":"def"}'
         );
         $this->assertEquals($this->client->getResponse()->getStatusCode(), Codes::HTTP_NO_CONTENT);
@@ -224,16 +224,16 @@ class ArticleControllerTest extends WebTestCase
     public function testJsonPatchBadParameters()
     {
         $this->client = static::createClient();
-        $fixtures = array('BlogBundle\Tests\Fixtures\Entity\LoadArticleData');
+        $fixtures = ['BlogBundle\Tests\Fixtures\Entity\LoadArticleData'];
         $this->loadFixtures($fixtures);
         $articles = LoadArticleData::$articles;
         $article = array_pop($articles);
         $this->client->request(
             'PATCH',
             sprintf('/v1/articles/%d.json', $article->getId()),
-            array(),
-            array(),
-            array('CONTENT_TYPE' => 'application/json'),
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
             '{"foobar":"foobar"}'
         );
         $this->assertJsonResponse($this->client->getResponse(), Codes::HTTP_BAD_REQUEST);
@@ -245,10 +245,10 @@ class ArticleControllerTest extends WebTestCase
     public function testDelete()
     {
         $this->client = static::createClient();
-        $fixtures = array('BlogBundle\Tests\Fixtures\Entity\LoadArticleData');
+        $fixtures = ['BlogBundle\Tests\Fixtures\Entity\LoadArticleData'];
         $this->loadFixtures($fixtures);
         $article = array_pop(LoadArticleData::$articles);
-        $route = $this->getUrl('api_v1_get_article', array('id' => $article->getId(), '_format' => 'json'));
+        $route = $this->getUrl('api_v1_get_article', ['id' => $article->getId(), '_format' => 'json']);
         $this->client->request('DELETE', $route);
         $response = $this->client->getResponse();
         $this->assertEquals($this->client->getResponse()->getStatusCode(), Codes::HTTP_NO_CONTENT);
@@ -261,7 +261,7 @@ class ArticleControllerTest extends WebTestCase
     {
         $id = 0;
         $this->client = static::createClient();
-        $route = $this->getUrl('api_v1_get_article', array('id' => $id, '_format' => 'json'));
+        $route = $this->getUrl('api_v1_get_article', ['id' => $id, '_format' => 'json']);
         $this->client->request('DELETE', $route);
         $response = $this->client->getResponse();
         $this->assertJsonResponse($response, Codes::HTTP_NOT_FOUND);
