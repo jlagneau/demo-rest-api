@@ -28,6 +28,7 @@ class ArticleType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'BlogBundle\Entity\Article',
             'csrf_protection' => false,
+            'extra_fields_message' => 'blog_bundle.article.extra_fields',
         ));
     }
 
