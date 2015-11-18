@@ -34,4 +34,4 @@ see [http://localhost:8000/app_dev.php/doc](http://localhost:8000/app_dev.php/do
 
 ## Tests
 
-    $ phpunit -c app/
+    $ php bin/phpunit -c app/
