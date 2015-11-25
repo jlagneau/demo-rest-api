@@ -95,3 +95,12 @@ fos_rest:
         failed_validation: HTTP_BAD_REQUEST
         default_engine: twig
         view_response_listener: force
+
+# Nelmio CORS Configuration
+nelmio_cors:
+    paths:
+        '^/':
+            allow_origin: ['*']
+            allow_headers: ['*']
+            allow_methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
+            max_age: 0
