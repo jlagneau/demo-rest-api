@@ -8,11 +8,12 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Util\Codes;
 use FOS\RestBundle\Controller\Annotations as FOSRest;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use BlogBundle\Entity\Article;
 use BlogBundle\Exception\InvalidFormException;
 
 /**
- * @FOSRest\NamePrefix("api_v1_")
+ * @FOSRest\NamePrefix("api_")
  */
 class ArticleController extends FOSRestController
 {
@@ -77,6 +78,8 @@ class ArticleController extends FOSRestController
     /**
      * Create an article from the submitted data.
      *
+     * @Security("has_role('ROLE_API')")
+     *
      * @ApiDoc(
      *   resource = true,
      *   description = "Create a new article from the submitted data.",
@@ -107,7 +110,7 @@ class ArticleController extends FOSRestController
                 '_format' => $request->get('_format'),
             ];
 
-            return $this->routeRedirectView('api_v1_get_article', $routeOptions, Codes::HTTP_CREATED);
+            return $this->routeRedirectView('api_get_article', $routeOptions, Codes::HTTP_CREATED);
         } catch (InvalidFormException $exception) {
             return $exception->getForm();
         }
@@ -115,6 +118,8 @@ class ArticleController extends FOSRestController
 
     /**
      * Update existing article from the submitted data or create a new article at a specific location.
+     *
+     * @Security("has_role('ROLE_API')")
      *
      * @ApiDoc(
      *   resource = true,
@@ -153,7 +158,7 @@ class ArticleController extends FOSRestController
                 '_format' => $request->get('_format'),
             ];
 
-            return $this->routeRedirectView('api_v1_get_article', $routeOptions, $statusCode);
+            return $this->routeRedirectView('api_get_article', $routeOptions, $statusCode);
         } catch (InvalidFormException $exception) {
             return $exception->getForm();
         }
@@ -161,6 +166,8 @@ class ArticleController extends FOSRestController
 
     /**
      * Update partially an existing article from the submitted data.
+     *
+     * @Security("has_role('ROLE_API')")
      *
      * @ApiDoc(
      *   resource = true,
@@ -197,6 +204,8 @@ class ArticleController extends FOSRestController
 
     /**
      * Delete a single article.
+     *
+     * @Security("has_role('ROLE_API')")
      *
      * @ApiDoc(
      *   resource = true,

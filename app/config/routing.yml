@@ -1,6 +1,5 @@
-app::
+app:
     type:     rest
-    prefix:   /v1
     resource: BlogBundle\Controller\ArticleController
 
 appDoc:

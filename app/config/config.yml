@@ -96,6 +96,17 @@ fos_rest:
         default_engine: twig
         view_response_listener: force
 
+# FOSUser Configuration
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: BlogBundle\Entity\User
+
+# UecodeApiKey Configuration
+uecode_api_key:
+    delivery: header # header or query
+    parameter_name: API-Auth
+
 # Nelmio CORS Configuration
 nelmio_cors:
     paths:
