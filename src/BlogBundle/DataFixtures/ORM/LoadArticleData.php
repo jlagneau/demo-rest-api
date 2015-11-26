@@ -1,19 +1,15 @@
 <?php
 
-namespace BlogBundle\Tests\Fixtures\Entity;
+namespace BlogBundle\DataFixtures\ORM;
 
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use BlogBundle\Entity\Article;
 use BlogBundle\Model\ArticleInterface;
 
-class LoadArticleData implements FixtureInterface
+class LoadArticleData extends AbstractFixture implements FixtureInterface
 {
-    /**
-     * @var array
-     */
-    public static $articles = array();
-
     /**
      * Load fixtures.
      */
@@ -28,10 +24,7 @@ class LoadArticleData implements FixtureInterface
         $manager->persist($article3);
         $manager->persist($article4);
         $manager->flush();
-        self::$articles[] = $article1;
-        self::$articles[] = $article2;
-        self::$articles[] = $article3;
-        self::$articles[] = $article4;
+        $this->setReference('article', $article1);
     }
 
     /**
@@ -41,11 +34,9 @@ class LoadArticleData implements FixtureInterface
      */
     protected function createArticle()
     {
-        static $i = 1;
         $article = new Article();
-        $article->setTitle('title '.$i);
-        $article->setContent('content '.$i);
-        ++$i;
+        $article->setTitle('Fixture title');
+        $article->setContent('Fixture content');
 
         return $article;
     }

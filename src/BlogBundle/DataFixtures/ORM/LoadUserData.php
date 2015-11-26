@@ -1,7 +1,8 @@
 <?php
 
-namespace BlogBundle\Tests\Fixtures\Entity;
+namespace BlogBundle\DataFixtures\ORM;
 
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -9,17 +10,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use FOS\UserBundle\Model\UserInterface;
 use BlogBundle\Entity\User;
 
-class LoadUserData implements FixtureInterface, ContainerAwareInterface
+class LoadUserData extends AbstractFixture implements FixtureInterface, ContainerAwareInterface
 {
     /**
-     * @var array
+     * @var ContainerInterface
      */
-    public static $users = array();
-
-	/**
-	 * @var ContainerInterface
-	 */
-	public $container;
+    public $container;
 
     /**
      * Load fixtures.
@@ -29,7 +25,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         $userManager = $this->container->get('fos_user.user_manager');
         $user = $this->createUser();
         $userManager->updateUser($user, true);
-        self::$users[] = $user;
+        $this->setReference('user', $user);
     }
 
     /**
@@ -50,10 +46,10 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
     }
 
     /**
-	 * Set container
-	 *
-	 * @param ContainerInterface
-	 */
+     * Set container.
+     *
+     * @param ContainerInterface
+     */
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;

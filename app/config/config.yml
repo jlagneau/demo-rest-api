@@ -79,7 +79,7 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-# FOSRest Configuration
+# FOS Rest Configuration
 fos_rest:
     disable_csrf_role: ROLE_API
     param_fetcher_listener: true
@@ -96,16 +96,16 @@ fos_rest:
         default_engine: twig
         view_response_listener: force
 
-# FOSUser Configuration
+# FOS User Configuration
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: BlogBundle\Entity\User
 
-# UecodeApiKey Configuration
+# Uecode Api Key Configuration
 uecode_api_key:
     delivery: header # header or query
-    parameter_name: API-Auth
+    parameter_name: X-Auth-Token
 
 # Nelmio CORS Configuration
 nelmio_cors:
@@ -115,3 +115,12 @@ nelmio_cors:
             allow_headers: ['*']
             allow_methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
             max_age: 0
+
+# Nelmio API Doc Configuration
+nelmio_api_doc:
+    motd:
+        template: ':ApiDoc:motd.html.twig'
+    sandbox:
+        authentication:
+            delivery: header
+            name:     X-Auth-Token
