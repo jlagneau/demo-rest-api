@@ -8,25 +8,29 @@
     },
     "require": {
         "php": ">=5.3.9",
-		"symfony/symfony": "2.7.*",
-		"doctrine/orm": "^2.4.8",
-		"doctrine/doctrine-bundle": "~1.4",
-		"symfony/assetic-bundle": "~2.3",
-		"symfony/swiftmailer-bundle": "~2.3",
-		"symfony/monolog-bundle": "~2.4",
-		"sensio/distribution-bundle": "~4.0",
-		"sensio/framework-extra-bundle": "^3.0.2",
-		"incenteev/composer-parameter-handler": "~2.0",
-		"friendsofsymfony/rest-bundle": "~1.0",
+        "symfony/symfony": "2.7.*",
+        "doctrine/orm": "^2.4.8",
+        "doctrine/doctrine-bundle": "~1.4",
+        "symfony/assetic-bundle": "~2.3",
+        "symfony/swiftmailer-bundle": "~2.3",
+        "symfony/monolog-bundle": "~2.4",
+        "sensio/distribution-bundle": "~4.0",
+        "sensio/framework-extra-bundle": "^3.0.2",
+        "incenteev/composer-parameter-handler": "~2.0",
+        "friendsofsymfony/rest-bundle": "~1.0",
+        "friendsofsymfony/user-bundle": "~2.0@dev",
         "jms/serializer-bundle": "1.*",
-        "nelmio/api-doc-bundle": "~2.7"
+        "nelmio/api-doc-bundle": "~2.7",
+        "nelmio/cors-bundle": "~1.0",
+        "uecode/api-key-bundle": "~2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
         "doctrine/doctrine-fixtures-bundle": "~2.0",
         "phpunit/phpunit": "~4.4",
         "satooshi/php-coveralls": "~0.6",
-        "liip/functional-test-bundle":"~1.0"
+        "liip/functional-test-bundle":"~1.0",
+		"ext-pdo_sqlite": "*"
     },
     "scripts": {
         "post-root-package-install": [

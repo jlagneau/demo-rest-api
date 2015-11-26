@@ -9,8 +9,8 @@ use BlogBundle\Model\ArticleInterface;
 /**
  * Article.
  *
- * @ORM\Table()
  * @ORM\Entity
+ * @ORM\Table(name="blog_article")
  */
 class Article implements ArticleInterface
 {
