@@ -7,7 +7,7 @@ use BlogBundle\Handler\ArticleHandler;
 
 class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
 {
-    const Article_CLASS = 'BlogBundle\Tests\Handler\DummyArticle';
+    const ARTICLE_CLASS = 'BlogBundle\Tests\Handler\DummyArticle';
 
     /**
      * @var BlogBundle\Handler\ArticleHandler
@@ -46,17 +46,17 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->om->expects($this->any())
              ->method('getRepository')
-             ->with($this->equalTo(static::Article_CLASS))
+             ->with($this->equalTo(static::ARTICLE_CLASS))
              ->will($this->returnValue($this->repository));
 
         $this->om->expects($this->any())
              ->method('getClassMetadata')
-             ->with($this->equalTo(static::Article_CLASS))
+             ->with($this->equalTo(static::ARTICLE_CLASS))
              ->will($this->returnValue($class));
 
         $class->expects($this->any())
               ->method('getName')
-              ->will($this->returnValue(static::Article_CLASS));
+              ->will($this->returnValue(static::ARTICLE_CLASS));
     }
 
     /**
@@ -74,7 +74,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
              ->with([], null, $limit, $offset)
              ->will($this->returnValue($articles));
 
-        $this->ArticleHandler = $this->createArticleHandler($this->om, static::Article_CLASS,  $this->formFactory);
+        $this->ArticleHandler = $this->createArticleHandler($this->om, static::ARTICLE_CLASS,  $this->formFactory);
         $all = $this->ArticleHandler->all($limit, $offset);
         $this->assertEquals($articles, $all);
     }
@@ -92,7 +92,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
              ->with($this->equalTo($id))
              ->will($this->returnValue($article));
 
-        $this->ArticleHandler = $this->createArticleHandler($this->om, static::Article_CLASS,  $this->formFactory);
+        $this->ArticleHandler = $this->createArticleHandler($this->om, static::ARTICLE_CLASS,  $this->formFactory);
         $this->ArticleHandler->get($id);
     }
 
@@ -122,7 +122,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
              ->method('create')
              ->will($this->returnValue($form));
 
-        $this->ArticleHandler = $this->createArticleHandler($this->om, static::Article_CLASS,  $this->formFactory);
+        $this->ArticleHandler = $this->createArticleHandler($this->om, static::ARTICLE_CLASS,  $this->formFactory);
         $articleObject = $this->ArticleHandler->post($parameters);
         $this->assertEquals($articleObject, $article);
     }
@@ -152,7 +152,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
              ->method('create')
              ->will($this->returnValue($form));
 
-        $this->ArticleHandler = $this->createArticleHandler($this->om, static::Article_CLASS,  $this->formFactory);
+        $this->ArticleHandler = $this->createArticleHandler($this->om, static::ARTICLE_CLASS,  $this->formFactory);
         $this->ArticleHandler->post($parameters);
     }
 
@@ -182,7 +182,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
              ->method('create')
              ->will($this->returnValue($form));
 
-        $this->ArticleHandler = $this->createArticleHandler($this->om, static::Article_CLASS,  $this->formFactory);
+        $this->ArticleHandler = $this->createArticleHandler($this->om, static::ARTICLE_CLASS,  $this->formFactory);
         $articleObject = $this->ArticleHandler->put($article, $parameters);
         $this->assertEquals($articleObject, $article);
     }
@@ -213,7 +213,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
              ->method('create')
              ->will($this->returnValue($form));
 
-        $this->ArticleHandler = $this->createArticleHandler($this->om, static::Article_CLASS,  $this->formFactory);
+        $this->ArticleHandler = $this->createArticleHandler($this->om, static::ARTICLE_CLASS,  $this->formFactory);
         $articleObject = $this->ArticleHandler->patch($article, $parameters);
         $this->assertEquals($articleObject, $article);
     }
@@ -239,7 +239,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
      */
     protected function getArticle()
     {
-        $articleClass = static::Article_CLASS;
+        $articleClass = static::ARTICLE_CLASS;
 
         return new $articleClass();
     }

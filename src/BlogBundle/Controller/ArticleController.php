@@ -3,10 +3,10 @@
 namespace BlogBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use FOS\RestBundle\Util\Codes;
 use FOS\RestBundle\Controller\Annotations as FOSRest;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use BlogBundle\Entity\Article;
@@ -22,7 +22,7 @@ class ArticleController extends FOSRestController
      *
      * @ApiDoc(
      *   resource = true,
-     *   statusCodes = {
+     *   statusResponse = {
      *     200 = "Returned when successful"
      *   }
      * )
@@ -52,7 +52,7 @@ class ArticleController extends FOSRestController
      *   resource = true,
      *   description = "Get an article for a given id.",
      *   output = "BlogBundle\Entity\Article",
-     *   statusCodes = {
+     *   statusResponse = {
      *     200 = "Returned when successful",
      *     404 = "Returned when the article does not exist"
      *   }
@@ -85,7 +85,7 @@ class ArticleController extends FOSRestController
      *   resource = true,
      *   description = "Create a new article from the submitted data.",
      *   input = "BlogBundle\Form\Type\ArticleType",
-     *   statusCodes = {
+     *   statusResponse = {
      *     201 = "Returned when the article is created",
      *     400 = "Returned when the form has errors",
      *     401 = "Returned when the credentials are missing or insufficient"
@@ -93,7 +93,7 @@ class ArticleController extends FOSRestController
      * )
      *
      * @FOSRest\View(
-     *  statusCode = Codes::HTTP_BAD_REQUEST,
+     *  statusCode = Response::HTTP_BAD_REQUEST,
      *  templateVar = "form"
      * )
      *
@@ -112,7 +112,7 @@ class ArticleController extends FOSRestController
                 '_format' => $request->get('_format'),
             ];
 
-            return $this->routeRedirectView('api_get_article', $routeOptions, Codes::HTTP_CREATED);
+            return $this->routeRedirectView('api_get_article', $routeOptions, Response::HTTP_CREATED);
         } catch (InvalidFormException $exception) {
             return $exception->getForm();
         }
@@ -127,7 +127,7 @@ class ArticleController extends FOSRestController
      *   authentication=true,
      *   resource = true,
      *   input = "BlogBundle\Form\Type\ArticleType",
-     *   statusCodes = {
+     *   statusResponse = {
      *     201 = "Returned when the article is created",
      *     303 = "Returned when the article is edited",
      *     400 = "Returned when the form has errors",
@@ -146,12 +146,12 @@ class ArticleController extends FOSRestController
     {
         try {
             if (!($article = $this->container->get('article_handler')->get($id))) {
-                $statusCode = Codes::HTTP_CREATED;
+                $statusCode = Response::HTTP_CREATED;
                 $article = $this->container->get('article_handler')->post(
                     $request->request->all()
                 );
             } else {
-                $statusCode = Codes::HTTP_SEE_OTHER;
+                $statusCode = Response::HTTP_SEE_OTHER;
                 $article = $this->container->get('article_handler')->put(
                     $article,
                     $request->request->all()
@@ -177,7 +177,7 @@ class ArticleController extends FOSRestController
      *   authentication=true,
      *   resource = true,
      *   input = "BlogBundle\Form\Type\ArticleType",
-     *   statusCodes = {
+     *   statusResponse = {
      *     204 = "Returned when the article was successfully patched",
      *     400 = "Returned when the form has errors",
      *     401 = "Returned when the credentials are missing or insufficient",
@@ -202,7 +202,7 @@ class ArticleController extends FOSRestController
                 $request->request->all()
             );
 
-            return $this->view($article, Codes::HTTP_NO_CONTENT);
+            return $this->view($article, Response::HTTP_NO_CONTENT);
         } catch (InvalidFormException $exception) {
             return $exception->getForm();
         }
@@ -217,7 +217,7 @@ class ArticleController extends FOSRestController
      *   authentication=true,
      *   resource = true,
      *   description = "Delete an article for a given id.",
-     *   statusCodes = {
+     *   statusResponse = {
      *     204 = "Returned when the article was successfully deleted",
      *     401 = "Returned when the credentials are missing or insufficient",
      *     404 = "Returned when the article does not exist"
@@ -238,6 +238,6 @@ class ArticleController extends FOSRestController
         $article = $this->container->get('article_handler')->delete(
             $this->container->get('article_handler')->get($id)
         );
-        $this->view($article, Codes::HTTP_NO_CONTENT);
+        $this->view($article, Response::HTTP_NO_CONTENT);
     }
 }
