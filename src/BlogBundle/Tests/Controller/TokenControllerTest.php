@@ -87,6 +87,6 @@ class TokenControllerTest extends WebTestCase
         );
 
         $response = $this->client->getResponse();
-        $this->assertJsonResponse($response, Response::HTTP_BAD_REQUEST);
+        $this->assertJsonResponse($response, Response::HTTP_UNAUTHORIZED);
     }
 }

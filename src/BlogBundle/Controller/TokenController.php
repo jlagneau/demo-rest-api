@@ -23,7 +23,6 @@ class TokenController extends FOSRestController
      *   input = "BlogBundle\Form\Type\CredentialType",
      *   statusCodes = {
      *     200 = "Returned when successful",
-     *     400 = "Returned when the form has error",
      *     401 = "Returned when the credentials are not valid"
      *   }
      * )
@@ -32,21 +31,20 @@ class TokenController extends FOSRestController
      *
      * @param Request $request the request object
      *
-     * @return array
+     * @return View
      */
     public function postTokensAction(Request $request)
     {
         try {
             $credentials = $request->request->all();
-            $token = $this->processForm($credentials);
             $routeOptions = [
                 '_format' => $request->get('_format'),
             ];
 
+            $token = $this->processForm($credentials);
+
             return $this->routeRedirectView('api_get_articles', $routeOptions, Response::HTTP_NO_CONTENT, $token);
         } catch (InvalidFormException $exception) {
-            return $exception->getForm();
-        } catch (\Exception $exception) {
             return $this->view(['error' => $exception->getMessage()], Response::HTTP_UNAUTHORIZED);
         }
     }
@@ -74,14 +72,15 @@ class TokenController extends FOSRestController
         if ($form->isValid()) {
             $credentials = $form->getData();
 
-            $user = $user_manager->loadUserByUsername($credentials['username']);
-            if (!$user) {
-                throw new \Exception($trans->trans('blog_bundle.bad_credentials'));
+            try {
+                $user = $user_manager->loadUserByUsername($credentials['username']);
+            } catch (\Exception $e) {
+                throw new InvalidFormException($trans->trans('blog_bundle.bad_credentials'), $form);
             }
 
             $encoder = $encoder_factory->getEncoder($user);
             if (!$encoder->isPasswordValid($user->getPassword(), $credentials['password'], $user->getSalt())) {
-                throw new \Exception($trans->trans('blog_bundle.bad_credentials'));
+                throw new InvalidFormException($trans->trans('blog_bundle.bad_credentials'), $form);
             }
 
             return ['X-Auth-Token' => $user->getApiKey()];
