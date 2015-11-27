@@ -16,10 +16,11 @@ use BlogBundle\Exception\InvalidFormException;
 class TokenController extends FOSRestController
 {
     /**
-     * Get Token.
+     * Get the user's token.
      *
      * @ApiDoc(
      *   resource = true,
+     *   input = "BlogBundle\Form\Type\CredentialType",
      *   statusCodes = {
      *     200 = "Returned when successful",
 	 *     400 = "Returned when the form has error",
