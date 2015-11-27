@@ -18,6 +18,9 @@ class TokenController extends FOSRestController
     /**
      * Get the user's token.
      *
+     * When the authentication is successful, a `X-Auth-Token` header is sent in the response.
+     * This token is required for authentication on secured resources.
+     *
      * @ApiDoc(
      *   resource = true,
      *   input = "BlogBundle\Form\Type\CredentialType",
