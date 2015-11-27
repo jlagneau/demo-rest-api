@@ -1,6 +1,6 @@
 security:
     encoders:
-        FOS\UserBundle\Model\UserInterface: sha512
+        BlogBundle\Entity\User: sha512
 
     role_hierarchy:
         ROLE_ADMIN:       [ROLE_USER, ROLE_API]
@@ -14,6 +14,9 @@ security:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        login:
+            pattern: ^/tokens
+            anonymous: true
         secured:
             pattern: ^/
             methods: [POST, PUT, PATCH, DELETE]

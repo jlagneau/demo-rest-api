@@ -1,6 +1,7 @@
 blog_bundle:
+  form:
+    extra_fields: "This resource does not contains these extra fields (\"{{ extra_fields }}\"). See documentation."
   article:
-    extra_fields: "Article does not contains these extra fields (\"{{ extra_fields }}\")."
     title.not_blank: "Article title cannot be empty."
     title.min_message: "Article title must be at least {{ limit }} characters long."
     title.max_message: "Article title cannot be longer than {{ limit }} characters long."
