@@ -39,7 +39,13 @@ class TokenControllerTest extends WebTestCase
         );
 
         $response = $this->client->getResponse();
-        $this->assertJsonResponse($response);
+        $this->assertStatusCode(Response::HTTP_NO_CONTENT, $this->client);
+        $this->assertTrue(
+            $response->headers->has('Location')
+        );
+        $this->assertTrue(
+            $response->headers->has('X-Auth-Token')
+        );
     }
 
     /**
