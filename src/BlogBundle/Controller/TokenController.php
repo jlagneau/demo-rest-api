@@ -22,7 +22,7 @@ class TokenController extends FOSRestController
      *   resource = true,
      *   input = "BlogBundle\Form\Type\CredentialType",
      *   statusCodes = {
-     *     303 = "Returned when successful",
+     *     204 = "Returned when successful",
      *     401 = "Returned when the credentials are not valid"
      *   }
      * )
@@ -43,7 +43,7 @@ class TokenController extends FOSRestController
 
             $token = $this->processForm($credentials);
 
-            return $this->routeRedirectView('api_get_articles', $routeOptions, Response::HTTP_SEE_OTHER, $token);
+            return $this->routeRedirectView('api_get_articles', $routeOptions, Response::HTTP_NO_CONTENT, $token);
         } catch (InvalidFormException $exception) {
             return $this->view(['error' => $exception->getMessage()], Response::HTTP_UNAUTHORIZED);
         }
