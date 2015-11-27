@@ -4,7 +4,6 @@ namespace BlogBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as FOSRest;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -44,7 +43,7 @@ class TokenController extends FOSRestController
                 '_format' => $request->get('_format'),
             ];
 
-            return $this->routeRedirectView('api_get_articles', [], Response::HTTP_OK, $token);
+            return $this->routeRedirectView('api_get_articles', $routeOptions, Response::HTTP_NO_CONTENT, $token);
         } catch (InvalidFormException $exception) {
             return $exception->getForm();
         } catch (\Exception $exception) {
