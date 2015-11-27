@@ -66,8 +66,8 @@ class ArticleControllerTest extends WebTestCase
             sprintf('/articles/%d.json', $article->getId()),
             ['ACCEPT' => 'application/json']
         );
-        $response = $this->client->getResponse();
 
+        $response = $this->client->getResponse();
         $this->assertJsonResponse($response, 200, false);
         $this->assertEquals($response->getContent(), null);
 
@@ -76,8 +76,8 @@ class ArticleControllerTest extends WebTestCase
             '/articles.json',
             ['ACCEPT' => 'application/json']
         );
-        $response = $this->client->getResponse();
 
+        $response = $this->client->getResponse();
         $this->assertJsonResponse($response, 200, false);
         $this->assertEquals($response->getContent(), null);
     }
@@ -101,7 +101,9 @@ class ArticleControllerTest extends WebTestCase
             ],
             '{"title":"foo","content":"bar"}'
         );
-        $this->assertJsonResponse($this->client->getResponse(), Response::HTTP_CREATED, false);
+
+        $response = $this->client->getResponse();
+        $this->assertJsonResponse($response, Response::HTTP_CREATED, false);
     }
 
     /**
@@ -124,7 +126,8 @@ class ArticleControllerTest extends WebTestCase
             '{"foo":"bar"}'
         );
 
-        $this->assertJsonResponse($this->client->getResponse(), Response::HTTP_BAD_REQUEST);
+        $response = $this->client->getResponse();
+        $this->assertJsonResponse($response, Response::HTTP_BAD_REQUEST);
     }
 
     /**
@@ -157,13 +160,10 @@ class ArticleControllerTest extends WebTestCase
             '{"title":"foobar","content":"foobar"}'
         );
 
+        $response = $this->client->getResponse();
         $this->assertJsonResponse($this->client->getResponse(), Response::HTTP_SEE_OTHER, false);
         $this->assertTrue(
-            $this->client->getResponse()->headers->contains(
-                'Location',
-                sprintf('http://localhost/articles/%d.json', $article->getId())
-            ),
-            $this->client->getResponse()->headers
+            $response->headers->has('Location')
         );
     }
 
@@ -197,7 +197,8 @@ class ArticleControllerTest extends WebTestCase
             '{"title":"barfoo","content":"barfoo"}'
         );
 
-        $this->assertJsonResponse($this->client->getResponse(), Response::HTTP_CREATED, false);
+        $response = $this->client->getResponse();
+        $this->assertJsonResponse($response, Response::HTTP_CREATED, false);
     }
 
     /**
@@ -222,7 +223,8 @@ class ArticleControllerTest extends WebTestCase
             '{"bar":"foo"}'
         );
 
-        $this->assertJsonResponse($this->client->getResponse(), Response::HTTP_BAD_REQUEST);
+        $response = $this->client->getResponse();
+        $this->assertJsonResponse($response, Response::HTTP_BAD_REQUEST);
     }
 
     /**
@@ -247,7 +249,9 @@ class ArticleControllerTest extends WebTestCase
             ],
             '{"content":"def"}'
         );
-        $this->assertEquals($this->client->getResponse()->getStatusCode(), Response::HTTP_NO_CONTENT);
+
+        $response = $this->client->getResponse();
+        $this->assertEquals($response->getStatusCode(), Response::HTTP_NO_CONTENT);
     }
 
     /**
@@ -271,7 +275,9 @@ class ArticleControllerTest extends WebTestCase
             ],
             '{"foobar":"foobar"}'
         );
-        $this->assertJsonResponse($this->client->getResponse(), Response::HTTP_BAD_REQUEST);
+
+        $response = $this->client->getResponse();
+        $this->assertJsonResponse($response, Response::HTTP_BAD_REQUEST);
     }
 
     /**
@@ -294,8 +300,9 @@ class ArticleControllerTest extends WebTestCase
                 'HTTP_X-Auth-Token' => $token,
             ]
         );
+
         $response = $this->client->getResponse();
-        $this->assertEquals($this->client->getResponse()->getStatusCode(), Response::HTTP_NO_CONTENT);
+        $this->assertEquals($response->getStatusCode(), Response::HTTP_NO_CONTENT);
     }
 
     /**
@@ -318,6 +325,7 @@ class ArticleControllerTest extends WebTestCase
                 'HTTP_X-Auth-Token' => $token,
             ]
         );
+
         $response = $this->client->getResponse();
         $this->assertJsonResponse($response, Response::HTTP_NOT_FOUND);
     }
