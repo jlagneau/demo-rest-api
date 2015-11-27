@@ -2,7 +2,7 @@
 
 namespace BlogBundle\Tests\Controller;
 
-use Liip\FunctionalTestBundle\Test\WebTestCase as WebTestCase;
+use BlogBundle\Tests\CustomWebTestCase as WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 class ArticleControllerTest extends WebTestCase
@@ -135,10 +135,11 @@ class ArticleControllerTest extends WebTestCase
         $this->client = static::createClient();
         $token = $this->getApiToken();
         $article = $this->getArticle();
+        $route = $this->getUrl('api_put_article', ['id' => $article->getId(), '_format' => 'json']);
 
         $this->client->request(
             'GET',
-            sprintf('/articles/%d.json', $article->getId()),
+            $route,
             ['ACCEPT' => 'application/json']
         );
 
@@ -146,7 +147,7 @@ class ArticleControllerTest extends WebTestCase
 
         $this->client->request(
             'PUT',
-            sprintf('/articles/%d.json', $article->getId()),
+            $route,
             [],
             [],
             [
@@ -174,10 +175,11 @@ class ArticleControllerTest extends WebTestCase
         $id = 0;
         $this->client = static::createClient();
         $token = $this->getApiToken();
+        $route = $this->getUrl('api_put_article', ['id' => $id, '_format' => 'json']);
 
         $this->client->request(
             'GET',
-            sprintf('/articles/%d.json', $id),
+            $route,
             ['ACCEPT' => 'application/json']
         );
 
@@ -185,7 +187,7 @@ class ArticleControllerTest extends WebTestCase
 
         $this->client->request(
             'PUT',
-            sprintf('/articles/%d.json', $id),
+            $route,
             [],
             [],
             [
@@ -206,10 +208,11 @@ class ArticleControllerTest extends WebTestCase
         $id = 0;
         $this->client = static::createClient();
         $token = $this->getApiToken();
+        $route = $this->getUrl('api_put_article', ['id' => $id, '_format' => 'json']);
 
         $this->client->request(
             'PUT',
-            sprintf('/articles/%d.json', $id),
+            $route,
             [],
             [],
             [
@@ -230,9 +233,11 @@ class ArticleControllerTest extends WebTestCase
         $this->client = static::createClient();
         $token = $this->getApiToken();
         $article = $this->getArticle();
+        $route = $this->getUrl('api_patch_article', ['id' => $article->getId(), '_format' => 'json']);
+
         $this->client->request(
             'PATCH',
-            sprintf('/articles/%d.json', $article->getId()),
+            $route,
             [],
             [],
             [
@@ -253,9 +258,11 @@ class ArticleControllerTest extends WebTestCase
         $this->client = static::createClient();
         $token = $this->getApiToken();
         $article = $this->getArticle();
+        $route = $this->getUrl('api_patch_article', ['id' => $article->getId(), '_format' => 'json']);
+
         $this->client->request(
             'PATCH',
-            sprintf('/articles/%d.json', $article->getId()),
+            $route,
             [],
             [],
             [
@@ -276,6 +283,7 @@ class ArticleControllerTest extends WebTestCase
         $token = $this->getApiToken();
         $article = $this->getArticle();
         $route = $this->getUrl('api_get_article', ['id' => $article->getId(), '_format' => 'json']);
+
         $this->client->request(
             'DELETE',
             $route,
@@ -299,6 +307,7 @@ class ArticleControllerTest extends WebTestCase
         $this->client = static::createClient();
         $token = $this->getApiToken();
         $route = $this->getUrl('api_get_article', ['id' => $id, '_format' => 'json']);
+
         $this->client->request(
             'DELETE',
             $route,
@@ -311,27 +320,6 @@ class ArticleControllerTest extends WebTestCase
         );
         $response = $this->client->getResponse();
         $this->assertJsonResponse($response, Response::HTTP_NOT_FOUND);
-    }
-
-    /**
-     * Assert that response was correctly formatted in JSON.
-     */
-    protected function assertJsonResponse($response, $statusCode = Response::HTTP_OK, $checkValidJson = true, $contentType = 'application/json')
-    {
-        $this->assertEquals(
-            $statusCode, $response->getStatusCode(),
-            $response->getContent()
-        );
-        $this->assertTrue(
-            $response->headers->contains('Content-Type', $contentType),
-            $response->headers
-        );
-        if ($checkValidJson) {
-            $decode = json_decode($response->getContent());
-            $this->assertTrue(($decode != null && $decode != false),
-                'is response valid json: ['.$response->getContent().']'
-            );
-        }
     }
 
     /**

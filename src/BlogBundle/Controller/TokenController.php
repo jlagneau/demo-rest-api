@@ -23,7 +23,7 @@ class TokenController extends FOSRestController
      *   input = "BlogBundle\Form\Type\CredentialType",
      *   statusCodes = {
      *     200 = "Returned when successful",
-	 *     400 = "Returned when the form has error",
+     *     400 = "Returned when the form has error",
      *     401 = "Returned when the credentials are not valid"
      *   }
      * )
