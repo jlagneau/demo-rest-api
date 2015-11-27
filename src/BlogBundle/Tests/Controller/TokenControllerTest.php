@@ -39,7 +39,7 @@ class TokenControllerTest extends WebTestCase
         );
 
         $response = $this->client->getResponse();
-        $this->assertStatusCode(Response::HTTP_NO_CONTENT, $this->client);
+        $this->assertStatusCode(Response::HTTP_SEE_OTHER, $this->client);
         $this->assertTrue(
             $response->headers->has('Location')
         );
