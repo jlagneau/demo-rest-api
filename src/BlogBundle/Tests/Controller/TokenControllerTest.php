@@ -28,7 +28,7 @@ class TokenControllerTest extends WebTestCase
     {
         $this->client = static::createClient();
         $route = $this->getUrl('api_post_tokens', ['_format' => 'json']);
-		$user = $this->fixtures->getReference('user');
+        $user = $this->fixtures->getReference('user');
 
         $this->client->request(
             'POST',
@@ -39,8 +39,8 @@ class TokenControllerTest extends WebTestCase
             '{"username":"test","password":"test"}'
         );
 
-		$this->assertTrue(isset($user));
-		$this->assertTrue($user->getId() !== null);
+        $this->assertTrue(isset($user));
+        $this->assertTrue($user->getId() !== null);
 
         $response = $this->client->getResponse();
         $this->assertStatusCode(Response::HTTP_NO_CONTENT, $this->client);
@@ -50,10 +50,10 @@ class TokenControllerTest extends WebTestCase
         $this->assertTrue(
             $response->headers->has('X-Auth-Token')
         );
-		$this->assertEquals(
-			$response->headers->get('X-Auth-Token'),
-			$user->getApiKey()
-		);
+        $this->assertEquals(
+            $response->headers->get('X-Auth-Token'),
+            $user->getApiKey()
+        );
     }
 
     /**
@@ -76,7 +76,7 @@ class TokenControllerTest extends WebTestCase
         $response = $this->client->getResponse();
         $this->assertJsonResponse($response, Response::HTTP_UNAUTHORIZED);
 
-		$this->client->request(
+        $this->client->request(
             'POST',
             $route,
             [],
