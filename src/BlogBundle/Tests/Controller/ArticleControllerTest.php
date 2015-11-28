@@ -16,6 +16,8 @@ class ArticleControllerTest extends WebTestCase
         self::runCommand('doctrine:schema:create');
         self::runCommand('doctrine:fixtures:load --purge-with-truncate --no-interaction');
 
+        $this->client = static::createClient();
+
         $this->fixtures = $this->loadFixtures([
             'BlogBundle\DataFixtures\ORM\LoadUserData',
             'BlogBundle\DataFixtures\ORM\LoadArticleData',
@@ -27,7 +29,6 @@ class ArticleControllerTest extends WebTestCase
      */
     public function testGet()
     {
-        $this->client = static::createClient();
         $route = $this->getUrl('api_get_articles', ['_format' => 'json', 'limit' => 2]);
         $this->client->request('GET', $route);
         $response = $this->client->getResponse();
@@ -58,7 +59,6 @@ class ArticleControllerTest extends WebTestCase
      */
     public function testHead()
     {
-        $this->client = static::createClient();
         $article = $this->getArticle();
 
         $this->client->request(
@@ -87,7 +87,6 @@ class ArticleControllerTest extends WebTestCase
      */
     public function testJsonPost()
     {
-        $this->client = static::createClient();
         $token = $this->getApiToken();
 
         $this->client->request(
@@ -111,7 +110,6 @@ class ArticleControllerTest extends WebTestCase
      */
     public function testJsonPostBadParameters()
     {
-        $this->client = static::createClient();
         $token = $this->getApiToken();
 
         $this->client->request(
@@ -135,7 +133,6 @@ class ArticleControllerTest extends WebTestCase
      */
     public function testJsonPutModify()
     {
-        $this->client = static::createClient();
         $token = $this->getApiToken();
         $article = $this->getArticle();
         $route = $this->getUrl('api_put_article', ['id' => $article->getId(), '_format' => 'json']);
@@ -173,7 +170,6 @@ class ArticleControllerTest extends WebTestCase
     public function testJsonPutCreate()
     {
         $id = 0;
-        $this->client = static::createClient();
         $token = $this->getApiToken();
         $route = $this->getUrl('api_put_article', ['id' => $id, '_format' => 'json']);
 
@@ -207,7 +203,6 @@ class ArticleControllerTest extends WebTestCase
     public function testJsonPutBadParameters()
     {
         $id = 0;
-        $this->client = static::createClient();
         $token = $this->getApiToken();
         $route = $this->getUrl('api_put_article', ['id' => $id, '_format' => 'json']);
 
@@ -232,7 +227,6 @@ class ArticleControllerTest extends WebTestCase
      */
     public function testJsonPatch()
     {
-        $this->client = static::createClient();
         $token = $this->getApiToken();
         $article = $this->getArticle();
         $route = $this->getUrl('api_patch_article', ['id' => $article->getId(), '_format' => 'json']);
@@ -259,7 +253,6 @@ class ArticleControllerTest extends WebTestCase
      */
     public function testJsonPatchBadParameters()
     {
-        $this->client = static::createClient();
         $token = $this->getApiToken();
         $article = $this->getArticle();
         $route = $this->getUrl('api_patch_article', ['id' => $article->getId(), '_format' => 'json']);
@@ -285,7 +278,6 @@ class ArticleControllerTest extends WebTestCase
      */
     public function testDelete()
     {
-        $this->client = static::createClient();
         $token = $this->getApiToken();
         $article = $this->getArticle();
         $route = $this->getUrl('api_get_article', ['id' => $article->getId(), '_format' => 'json']);
@@ -311,7 +303,6 @@ class ArticleControllerTest extends WebTestCase
     public function testDeleteNotFound()
     {
         $id = 0;
-        $this->client = static::createClient();
         $token = $this->getApiToken();
         $route = $this->getUrl('api_get_article', ['id' => $id, '_format' => 'json']);
 

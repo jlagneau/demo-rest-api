@@ -16,6 +16,8 @@ class TokenControllerTest extends WebTestCase
         self::runCommand('doctrine:schema:create');
         self::runCommand('doctrine:fixtures:load --purge-with-truncate --no-interaction');
 
+        $this->client = static::createClient();
+
         $this->fixtures = $this->loadFixtures([
             'BlogBundle\DataFixtures\ORM\LoadUserData',
         ])->getReferenceRepository();
@@ -26,7 +28,6 @@ class TokenControllerTest extends WebTestCase
      */
     public function testJsonPost()
     {
-        $this->client = static::createClient();
         $route = $this->getUrl('api_post_tokens', ['_format' => 'json']);
         $user = $this->fixtures->getReference('user');
 
