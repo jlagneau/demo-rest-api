@@ -327,13 +327,18 @@ class ArticleControllerTest extends WebTestCase
         $this->assertJsonResponse($response, Response::HTTP_NOT_FOUND);
     }
 
+    /**
+     * Get User.
+     *
+     * @return UserInterface
+     */
     protected function getUser()
     {
         return $this->fixtures->getReference('user');
     }
 
     /**
-     * Get Articles.
+     * Get Article.
      *
      * @return ArticleInterface
      */
