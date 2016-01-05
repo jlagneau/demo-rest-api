@@ -144,15 +144,16 @@ class ArticleController extends FOSRestController
      */
     public function putArticleAction(Request $request, $id)
     {
+        $handler = $this->container->get('article_handler');
         try {
-            if (!($article = $this->container->get('article_handler')->get($id))) {
+            if (!($article = $handler->get($id))) {
                 $statusCode = Response::HTTP_CREATED;
-                $article = $this->container->get('article_handler')->post(
+                $article = $handler->post(
                     $request->request->all()
                 );
             } else {
                 $statusCode = Response::HTTP_SEE_OTHER;
-                $article = $this->container->get('article_handler')->put(
+                $article = $handler->put(
                     $article,
                     $request->request->all()
                 );
@@ -196,9 +197,10 @@ class ArticleController extends FOSRestController
      */
     public function patchArticleAction(Request $request, Article $id)
     {
+        $handler = $this->container->get('article_handler');
         try {
-            $article = $this->container->get('article_handler')->patch(
-                $this->container->get('article_handler')->get($id),
+            $article = $handler->patch(
+                $handler->get($id),
                 $request->request->all()
             );
 
@@ -235,9 +237,9 @@ class ArticleController extends FOSRestController
      */
     public function deleteArticleAction(Article $id)
     {
-        $article = $this->container->get('article_handler')->delete(
-            $this->container->get('article_handler')->get($id)
-        );
-        $this->view($article, Response::HTTP_NO_CONTENT);
+        $handler = $this->container->get('article_handler');
+        $article = $handler->delete($handler->get($id));
+
+        return $this->view($article, Response::HTTP_NO_CONTENT);
     }
 }

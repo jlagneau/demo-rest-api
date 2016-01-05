@@ -1,13 +1,13 @@
 <?php
 
-namespace BlogBundle\Tests\Handler;
+namespace Tests\BlogBundle\Handler;
 
 use BlogBundle\Entity\Article;
 use BlogBundle\Handler\ArticleHandler;
 
 class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
 {
-    const ARTICLE_CLASS = 'BlogBundle\Tests\Handler\DummyArticle';
+    const ARTICLE_CLASS = 'Tests\BlogBundle\Handler\DummyArticle';
 
     /**
      * @var BlogBundle\Handler\ArticleHandler
@@ -105,7 +105,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
         $content = 'content1';
         $parameters = ['title' => $title, 'content' => $content];
         $article = $this->getArticle();
-        $form = $this->getMock('BlogBundle\Tests\FormInterface');
+        $form = $this->getMock('Tests\BlogBundle\FormInterface');
 
         $article->setTitle($title);
         $article->setContent($content);
@@ -138,7 +138,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
         $content = 'content1';
         $parameters = ['title' => $title, 'content' => $content];
         $article = $this->getArticle();
-        $form = $this->getMock('BlogBundle\Tests\FormInterface');
+        $form = $this->getMock('Tests\BlogBundle\FormInterface');
 
         $article->setTitle($title);
         $article->setContent($content);
@@ -165,7 +165,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
         $content = 'content1';
         $parameters = ['title' => $title, 'content' => $content];
         $article = $this->getArticle();
-        $form = $this->getMock('BlogBundle\Tests\FormInterface');
+        $form = $this->getMock('Tests\BlogBundle\FormInterface');
 
         $article->setTitle($title);
         $article->setContent($content);
@@ -196,7 +196,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
         $content = 'content1';
         $parameters = ['content' => $content];
         $article = $this->getArticle();
-        $form = $this->getMock('BlogBundle\Tests\FormInterface');
+        $form = $this->getMock('Tests\BlogBundle\FormInterface');
 
         $article->setTitle($title);
         $article->setContent($content);
