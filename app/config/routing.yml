@@ -1,7 +1,7 @@
+api_doc:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /
+
 blog_article:
     type:     rest
     resource: BlogBundle\Controller\ArticleController
-
-appDoc:
-    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
-    prefix:   /doc
