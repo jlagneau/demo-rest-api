@@ -6,7 +6,7 @@
 
 ---
 
-This is a simple symfony2 demo of a blog in REST
+This is a simple symfony3 demo of a REST API for a blog.
 
 ## Install and run
 
