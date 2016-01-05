@@ -2,6 +2,13 @@ blog_article:
     type:     rest
     resource: BlogBundle\Controller\ArticleController
 
-appDoc:
+api_doc:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /doc
+
+homepage:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route:       nelmio_api_doc_index
+        permanent:   true
