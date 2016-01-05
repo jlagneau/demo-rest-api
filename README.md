@@ -17,12 +17,12 @@ Inside the directory:
 
 Change configurations in `app/config/parameters.yml` if needed and run :
 
-	$ php app/console doctrine:database:create
-	$ php app/console doctrine:schema:create
+	$ php bin/console doctrine:database:create
+	$ php bin/console doctrine:schema:create
 
 Now you can start the server (for development only) :
 
-    $ php app/console server:start
+    $ php bin/console server:start
 
 ## API doc
 
@@ -30,4 +30,4 @@ see [http://localhost:8000/app_dev.php/doc](http://localhost:8000/app_dev.php/do
 
 ## Tests
 
-    $ php bin/phpunit -c app/
+    $ php bin/phpunit
