@@ -1,31 +1,28 @@
 security:
     encoders:
-        BlogBundle\Entity\User: sha512
+        FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
         ROLE_ADMIN:       [ROLE_USER, ROLE_API]
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        db:
-            id: uecode.api_key.provider.user_provider
+        fos_userbundle:
+            id: fos_user.user_provider.username
 
     firewalls:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        login:
-            pattern: ^/tokens
-            anonymous: true
-        secured:
-            pattern: ^/
-            methods: [POST, PUT, PATCH, DELETE]
-            api_key: true
-            stateless: true
-            provider: db
         main:
             pattern: ^/
+            methods: [POST, PUT, PATCH, DELETE]
+            form_login: false
+            provider: fos_userbundle
+            http_basic:
+                realm: "Secured area"
             anonymous: true
 
     access_control:
-        #- { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/article, roles: ROLE_API, methods: [POST, PUT, PATCH, DELETE] }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }

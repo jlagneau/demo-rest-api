@@ -1,6 +1,6 @@
 <?php
 
-namespace BlogBundle\Tests;
+namespace Tests\BlogBundle;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase as WebTestCase;
 use Symfony\Component\HttpFoundation\Response;

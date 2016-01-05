@@ -2,7 +2,7 @@
 /**
  * interface in order to mock forminteraface waiting https://github.com/sebastianbergmann/phpunit-mock-objects/issues/103.
  */
-namespace  BlogBundle\Tests;
+namespace  Tests\BlogBundle;
 
 use Symfony\Component\Form\FormInterface as FI;
 

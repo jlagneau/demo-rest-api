@@ -133,7 +133,7 @@ class ArticleHandler implements ArticleHandlerInterface
      */
     private function processForm(ArticleInterface $article, array $parameters, $method = 'PUT')
     {
-        $form = $this->formFactory->create(new ArticleType(), $article, ['method' => $method]);
+        $form = $this->formFactory->create(ArticleType::class, $article, ['method' => $method]);
         $form->submit($parameters, 'PATCH' !== $method);
         if ($form->isValid()) {
             $article = $form->getData();

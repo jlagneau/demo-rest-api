@@ -2,10 +2,6 @@ blog_article:
     type:     rest
     resource: BlogBundle\Controller\ArticleController
 
-blog_token:
-    type:     rest
-    resource: BlogBundle\Controller\TokenController
-
 appDoc:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /doc
