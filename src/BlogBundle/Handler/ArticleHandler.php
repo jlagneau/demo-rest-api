@@ -125,7 +125,7 @@ class ArticleHandler implements ArticleHandlerInterface
      *
      * @param ArticleInterface $article
      * @param array            $parameters
-     * @param String           $method
+     * @param string           $method
      *
      * @return ArticleInterface
      *
