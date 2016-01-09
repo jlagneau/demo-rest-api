@@ -1,40 +1,29 @@
-pre_composer_script: |
-  #!/bin/bash
-
-  # Do what you need to setup your project
-  cp app/config/parameters.yml.dist app/config/parameters.yml
-  sed -i -e \"s/secret:.*/secret: YoLo/\" app/config/parameters.yml
-  sed -i -e \"s/server_version:.*/server_version: 5.5/\" app/config/parameters.yml
-
-post_composer_script: |
-  #!/bin/bash
-
-  # Do what you need to configure your project
-  # ./app/console doctrine:database:create --no-interaction
-  # ./app/console doctrine:schema:create --no-interaction
-
-php_ini: "extension=openssl.so\nextension=mcrypt.so\n"
+# SensioLabs Insight configuration
+#
+# pre_composer_script: |
+#   #!/bin/bash
+#
+#   # Do what you need to setup your project
+#   cp app/config/parameters.yml.dist app/config/parameters.yml
+#   sed -i -e \"s/secret:.*/secret: YoLo/\" app/config/parameters.yml
+#   sed -i -e \"s/server_version:.*/server_version: 5.5/\" app/config/parameters.yml
+#
+# post_composer_script: |
+#   #!/bin/bash
+#
+#   # Do what you need to configure your project
+#   php ./bin/console doctrine:database:create --no-interaction
+#   php ./bin/console doctrine:schema:create --no-interaction
+#
+# php_ini: |
+#   extension=openssl.so
+#   extension=mcrypt.so
 
 global_exclude_dirs:
     - vendor
-    - vendors
-    - test
-    - tests
     - Tests
-    - spec
-    - features
-    - Fixtures
     - DataFixtures
     - var
+
 exclude_patterns:
-    - app/check.php
-    - app/SymfonyRequirements.php
-    - web/config.php
     - 'web/app_*.php'
-rules:
-    # Symfony ~2.7 build contain deprecated calls.
-    third_party.use_deprecated_service:
-        enabled: false
-    # False positive about redirection in my build.
-    symfony.controller.missing_redirect_after_post:
-        enabled: false
