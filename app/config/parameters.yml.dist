@@ -24,3 +24,4 @@ parameters:
     # Credentials
     user_name:         username
     user_pass:         userpass
+    user_email:        username@example.com

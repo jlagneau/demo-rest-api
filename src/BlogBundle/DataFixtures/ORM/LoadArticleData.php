@@ -24,7 +24,7 @@ class LoadArticleData extends AbstractFixture implements FixtureInterface
         $manager->persist($article3);
         $manager->persist($article4);
         $manager->flush();
-        $this->setReference('article', $article1);
+        $this->setReference('article-test', $article1);
     }
 
     /**

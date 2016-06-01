@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ArticleControllerTest extends WebTestCase
 {
+    private $parameters;
+
     /**
      * Set up the database and fixtures for tests.
      */
@@ -22,6 +24,11 @@ class ArticleControllerTest extends WebTestCase
             'BlogBundle\DataFixtures\ORM\LoadUserData',
             'BlogBundle\DataFixtures\ORM\LoadArticleData',
         ])->getReferenceRepository();
+
+        self::bootKernel();
+
+        $this->parameters['user_name'] = static::$kernel->getContainer()->getParameter('user_name');
+        $this->parameters['user_pass'] = static::$kernel->getContainer()->getParameter('user_pass');
     }
 
     /**
@@ -42,8 +49,7 @@ class ArticleControllerTest extends WebTestCase
             $this->assertTrue(isset($article['content']));
         }
 
-        $article = $this->getArticle();
-        $route = $this->getUrl('api_get_article', ['id' => $article->getId(), '_format' => 'json']);
+        $route = $this->getUrl('api_get_article', ['id' => 1, '_format' => 'json']);
         $this->client->request('GET', $route);
         $response = $this->client->getResponse();
         $this->assertJsonResponse($response, Response::HTTP_OK);
@@ -59,11 +65,9 @@ class ArticleControllerTest extends WebTestCase
      */
     public function testHead()
     {
-        $article = $this->getArticle();
-
         $this->client->request(
             'HEAD',
-            sprintf('/articles/%d.json', $article->getId()),
+            sprintf('/articles/%d.json', 1),
             ['ACCEPT' => 'application/json']
         );
 
@@ -94,14 +98,36 @@ class ArticleControllerTest extends WebTestCase
             [],
             [
                 'CONTENT_TYPE' => 'application/json',
-                'PHP_AUTH_USER' => 'test',
-                'PHP_AUTH_PW' => 'test',
+                'PHP_AUTH_USER' => $this->parameters['user_name'],
+                'PHP_AUTH_PW' => $this->parameters['user_pass'],
             ],
             '{"title":"foo","content":"bar"}'
         );
 
         $response = $this->client->getResponse();
         $this->assertJsonResponse($response, Response::HTTP_CREATED, false);
+    }
+
+    /**
+     * Test POST HTTP method with bad credentials.
+     */
+    public function testJsonPostBadCredentials()
+    {
+        $this->client->request(
+            'POST',
+            '/articles.json',
+            [],
+            [],
+            [
+                'CONTENT_TYPE' => 'application/json',
+                'PHP_AUTH_USER' => 'foo',
+                'PHP_AUTH_PW' => 'bar',
+            ],
+            '{"title":"foo","content":"bar"}'
+        );
+
+        $response = $this->client->getResponse();
+        $this->assertJsonResponse($response, Response::HTTP_UNAUTHORIZED, false);
     }
 
     /**
@@ -116,8 +142,8 @@ class ArticleControllerTest extends WebTestCase
             [],
             [
                 'CONTENT_TYPE' => 'application/json',
-                'PHP_AUTH_USER' => 'test',
-                'PHP_AUTH_PW' => 'test',
+                'PHP_AUTH_USER' => $this->parameters['user_name'],
+                'PHP_AUTH_PW' => $this->parameters['user_pass'],
             ],
             '{"foo":"bar"}'
         );
@@ -131,8 +157,7 @@ class ArticleControllerTest extends WebTestCase
      */
     public function testJsonPutModify()
     {
-        $article = $this->getArticle();
-        $route = $this->getUrl('api_put_article', ['id' => $article->getId(), '_format' => 'json']);
+        $route = $this->getUrl('api_put_article', ['id' => 1, '_format' => 'json']);
 
         $this->client->request(
             'GET',
@@ -153,8 +178,8 @@ class ArticleControllerTest extends WebTestCase
             [],
             [
                 'CONTENT_TYPE' => 'application/json',
-                'PHP_AUTH_USER' => 'test',
-                'PHP_AUTH_PW' => 'test',
+                'PHP_AUTH_USER' => $this->parameters['user_name'],
+                'PHP_AUTH_PW' => $this->parameters['user_pass'],
             ],
             '{"title":"foobar","content":"foobar"}'
         );
@@ -171,8 +196,7 @@ class ArticleControllerTest extends WebTestCase
      */
     public function testJsonPutCreate()
     {
-        $id = 0;
-        $route = $this->getUrl('api_put_article', ['id' => $id, '_format' => 'json']);
+        $route = $this->getUrl('api_put_article', ['id' => 0, '_format' => 'json']);
 
         $this->client->request(
             'GET',
@@ -193,8 +217,8 @@ class ArticleControllerTest extends WebTestCase
             [],
             [
                 'CONTENT_TYPE' => 'application/json',
-                'PHP_AUTH_USER' => 'test',
-                'PHP_AUTH_PW' => 'test',
+                'PHP_AUTH_USER' => $this->parameters['user_name'],
+                'PHP_AUTH_PW' => $this->parameters['user_pass'],
             ],
             '{"title":"barfoo","content":"barfoo"}'
         );
@@ -208,8 +232,7 @@ class ArticleControllerTest extends WebTestCase
      */
     public function testJsonPutBadParameters()
     {
-        $id = 0;
-        $route = $this->getUrl('api_put_article', ['id' => $id, '_format' => 'json']);
+        $route = $this->getUrl('api_put_article', ['id' => 0, '_format' => 'json']);
 
         $this->client->request(
             'PUT',
@@ -218,8 +241,8 @@ class ArticleControllerTest extends WebTestCase
             [],
             [
                 'CONTENT_TYPE' => 'application/json',
-                'PHP_AUTH_USER' => 'test',
-                'PHP_AUTH_PW' => 'test',
+                'PHP_AUTH_USER' => $this->parameters['user_name'],
+                'PHP_AUTH_PW' => $this->parameters['user_pass'],
             ],
             '{"bar":"foo"}'
         );
@@ -233,8 +256,7 @@ class ArticleControllerTest extends WebTestCase
      */
     public function testJsonPatch()
     {
-        $article = $this->getArticle();
-        $route = $this->getUrl('api_patch_article', ['id' => $article->getId(), '_format' => 'json']);
+        $route = $this->getUrl('api_patch_article', ['id' => 1, '_format' => 'json']);
 
         $this->client->request(
             'PATCH',
@@ -244,8 +266,8 @@ class ArticleControllerTest extends WebTestCase
             [
                 'CONTENT_TYPE' => 'application/json',
                 'ACCEPT' => 'application/json',
-                'PHP_AUTH_USER' => 'test',
-                'PHP_AUTH_PW' => 'test',
+                'PHP_AUTH_USER' => $this->parameters['user_name'],
+                'PHP_AUTH_PW' => $this->parameters['user_pass'],
             ],
             '{"content":"def"}'
         );
@@ -259,8 +281,7 @@ class ArticleControllerTest extends WebTestCase
      */
     public function testJsonPatchBadParameters()
     {
-        $article = $this->getArticle();
-        $route = $this->getUrl('api_patch_article', ['id' => $article->getId(), '_format' => 'json']);
+        $route = $this->getUrl('api_patch_article', ['id' => 1, '_format' => 'json']);
 
         $this->client->request(
             'PATCH',
@@ -269,8 +290,8 @@ class ArticleControllerTest extends WebTestCase
             [],
             [
                 'CONTENT_TYPE' => 'application/json',
-                'PHP_AUTH_USER' => 'test',
-                'PHP_AUTH_PW' => 'test',
+                'PHP_AUTH_USER' => $this->parameters['user_name'],
+                'PHP_AUTH_PW' => $this->parameters['user_pass'],
             ],
             '{"foobar":"foobar"}'
         );
@@ -284,8 +305,7 @@ class ArticleControllerTest extends WebTestCase
      */
     public function testDelete()
     {
-        $article = $this->getArticle();
-        $route = $this->getUrl('api_get_article', ['id' => $article->getId(), '_format' => 'json']);
+        $route = $this->getUrl('api_get_article', ['id' => 1, '_format' => 'json']);
 
         $this->client->request(
             'DELETE',
@@ -294,8 +314,8 @@ class ArticleControllerTest extends WebTestCase
             [],
             [
                 'CONTENT_TYPE' => 'application/json',
-                'PHP_AUTH_USER' => 'test',
-                'PHP_AUTH_PW' => 'test',
+                'PHP_AUTH_USER' => $this->parameters['user_name'],
+                'PHP_AUTH_PW' => $this->parameters['user_pass'],
             ]
         );
 
@@ -318,32 +338,12 @@ class ArticleControllerTest extends WebTestCase
             [],
             [
                 'CONTENT_TYPE' => 'application/json',
-                'PHP_AUTH_USER' => 'test',
-                'PHP_AUTH_PW' => 'test',
+                'PHP_AUTH_USER' => $this->parameters['user_name'],
+                'PHP_AUTH_PW' => $this->parameters['user_pass'],
             ]
         );
 
         $response = $this->client->getResponse();
         $this->assertJsonResponse($response, Response::HTTP_NOT_FOUND);
-    }
-
-    /**
-     * Get User.
-     *
-     * @return UserInterface
-     */
-    protected function getUser()
-    {
-        return $this->fixtures->getReference('user');
-    }
-
-    /**
-     * Get Article.
-     *
-     * @return ArticleInterface
-     */
-    protected function getArticle()
-    {
-        return $this->fixtures->getReference('article');
     }
 }
