@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ee7b343d89f05af682ae27e59bdb32da",
-    "content-hash": "632ad4929d8aab9274bdd5abcc58e110",
+    "hash": "33cfebb4e7fc173f5c049c105a65b782",
+    "content-hash": "99a1e3aa9f1d6dfe52c29a6207852b8b",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2041,7 +2041,7 @@
         },
         {
             "name": "stof/doctrine-extensions-bundle",
-            "version": "dev-master",
+            "version": "v1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stof/StofDoctrineExtensionsBundle.git",
@@ -3349,8 +3349,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "friendsofsymfony/user-bundle": 20,
-        "stof/doctrine-extensions-bundle": 20
+        "friendsofsymfony/user-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
