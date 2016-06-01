@@ -30,7 +30,7 @@ see [http://localhost:8000/app_dev.php/][4] once the webserver is started.
 
 ## Tests
 
-    $ php bin/phpunit
+    $ phpunit
 
 [1]: https://insight.sensiolabs.com/projects/51a77b1b-c6bd-4dde-8b7f-563a7ab3036f
 [2]: https://travis-ci.org/jlagneau/demo-rest-api
