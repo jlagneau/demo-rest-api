@@ -19,8 +19,8 @@ security:
             methods: [POST, PUT, PATCH, DELETE]
             form_login: false
             provider: fos_userbundle
-            http_basic:
-                realm: "Secured area"
+            http_basic: ~
+            stateless: true
             anonymous: true
 
     access_control:

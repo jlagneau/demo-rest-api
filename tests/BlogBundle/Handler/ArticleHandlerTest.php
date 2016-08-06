@@ -39,10 +39,10 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $class = $this->getMock('Doctrine\Common\Persistence\Mapping\ClassMetadata');
-        $this->om = $this->getMock('Doctrine\Common\Persistence\ObjectManager');
-        $this->repository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
-        $this->formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+        $class = $this->createMock('Doctrine\Common\Persistence\Mapping\ClassMetadata');
+        $this->om = $this->createMock('Doctrine\Common\Persistence\ObjectManager');
+        $this->repository = $this->createMock('Doctrine\Common\Persistence\ObjectRepository');
+        $this->formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
 
         $this->om->expects($this->any())
              ->method('getRepository')
@@ -105,7 +105,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
         $content = 'content1';
         $parameters = ['title' => $title, 'content' => $content];
         $article = $this->getArticle();
-        $form = $this->getMock('Tests\BlogBundle\FormInterface');
+        $form = $this->createMock('Tests\BlogBundle\FormInterface');
 
         $article->setTitle($title);
         $article->setContent($content);
@@ -138,7 +138,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
         $content = 'content1';
         $parameters = ['title' => $title, 'content' => $content];
         $article = $this->getArticle();
-        $form = $this->getMock('Tests\BlogBundle\FormInterface');
+        $form = $this->createMock('Tests\BlogBundle\FormInterface');
 
         $article->setTitle($title);
         $article->setContent($content);
@@ -165,7 +165,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
         $content = 'content1';
         $parameters = ['title' => $title, 'content' => $content];
         $article = $this->getArticle();
-        $form = $this->getMock('Tests\BlogBundle\FormInterface');
+        $form = $this->createMock('Tests\BlogBundle\FormInterface');
 
         $article->setTitle($title);
         $article->setContent($content);
@@ -196,7 +196,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
         $content = 'content1';
         $parameters = ['content' => $content];
         $article = $this->getArticle();
-        $form = $this->getMock('Tests\BlogBundle\FormInterface');
+        $form = $this->createMock('Tests\BlogBundle\FormInterface');
 
         $article->setTitle($title);
         $article->setContent($content);
