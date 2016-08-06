@@ -69,8 +69,8 @@ class ArticleController extends FOSRestController
     public function getArticleAction(Article $id)
     {
         $article = $this->container
-                     ->get('article_handler')
-                     ->get($id);
+                        ->get('article_handler')
+                        ->get($id);
 
         return $this->view($article, 200);
     }
