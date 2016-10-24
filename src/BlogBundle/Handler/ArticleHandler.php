@@ -2,12 +2,12 @@
 
 namespace BlogBundle\Handler;
 
+use BlogBundle\Exception\InvalidFormException;
+use BlogBundle\Form\Type\ArticleType;
+use BlogBundle\Model\ArticleHandlerInterface;
+use BlogBundle\Model\ArticleInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\FormFactoryInterface;
-use BlogBundle\Model\ArticleInterface;
-use BlogBundle\Model\ArticleHandlerInterface;
-use BlogBundle\Form\Type\ArticleType;
-use BlogBundle\Exception\InvalidFormException;
 
 class ArticleHandler implements ArticleHandlerInterface
 {
@@ -127,9 +127,9 @@ class ArticleHandler implements ArticleHandlerInterface
      * @param array            $parameters
      * @param string           $method
      *
-     * @return ArticleInterface
-     *
      * @throws InvalidFormException
+     *
+     * @return ArticleInterface
      */
     private function processForm(ArticleInterface $article, array $parameters, $method = 'PUT')
     {
