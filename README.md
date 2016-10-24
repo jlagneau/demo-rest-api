@@ -15,15 +15,19 @@ Inside the directory:
 
     $ curl -sS https://getcomposer.org/installer | php
     $ mkdir var/jwt
+
+    # change "passphrase" by the passphrase you desire and edit it in the parameters.yml file
     $ openssl genrsa -passout pass:passphrase -out var/jwt/private.pem -aes256 4096
     $ openssl rsa -passin pass:passphrase -pubout -in var/jwt/private.pem -out var/jwt/public.pem
     $ php composer.phar install
 
 Change configurations in `app/config/parameters.yml` if needed and run :
 
-	$ php bin/console doctrine:database:create
-	$ php bin/console doctrine:schema:create
-  $ php bin/console doctrine:fixtures:load --no-interaction
+    $ php bin/console doctrine:database:create
+    $ php bin/console doctrine:schema:create
+
+    # If you want to load some fixtures
+    $ php bin/console doctrine:fixtures:load --no-interaction
 
 Now you can start the server (for development only) :
 
