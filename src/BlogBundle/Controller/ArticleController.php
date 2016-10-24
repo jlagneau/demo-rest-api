@@ -108,7 +108,7 @@ class ArticleController extends FOSRestController
                 $request->request->all()
             );
             $routeOptions = [
-                'id'      => $newArticle->getId(),
+                'id' => $newArticle->getId(),
                 '_format' => $request->get('_format'),
             ];
 
@@ -159,7 +159,7 @@ class ArticleController extends FOSRestController
                 );
             }
             $routeOptions = [
-                'id'      => $article->getId(),
+                'id' => $article->getId(),
                 '_format' => $request->get('_format'),
             ];
 

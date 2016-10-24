@@ -247,7 +247,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
     /**
      * Get a list of Articles.
      *
-     * @param int $maxArticles The number of Articles to retrieve.
+     * @param int $maxArticles The number of Articles to retrieve
      *
      * @return array
      */
