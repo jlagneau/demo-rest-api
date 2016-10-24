@@ -14,18 +14,16 @@ class ArticleControllerTest extends WebTestCase
      */
     public function setUp()
     {
+        self::bootKernel();
         self::runCommand('doctrine:database:create');
         self::runCommand('doctrine:schema:create');
         self::runCommand('doctrine:fixtures:load --purge-with-truncate --no-interaction');
 
         $this->client = static::createClient();
-
         $this->fixtures = $this->loadFixtures([
             'BlogBundle\DataFixtures\ORM\LoadUserData',
             'BlogBundle\DataFixtures\ORM\LoadArticleData',
         ])->getReferenceRepository();
-
-        self::bootKernel();
 
         $this->parameters['user_name'] = static::$kernel->getContainer()->getParameter('user_name');
         $this->parameters['user_pass'] = static::$kernel->getContainer()->getParameter('user_pass');
@@ -112,7 +110,6 @@ class ArticleControllerTest extends WebTestCase
      */
     public function testJsonPostBadCredentials()
     {
-        $this->createAuthenticatedClient('foo', 'bar');
         $this->client->request(
             'POST',
             '/articles.json',
@@ -339,24 +336,15 @@ class ArticleControllerTest extends WebTestCase
 
     /**
      * Create a client with a default Authorization header.
-     *
-     * @param string $username
-     * @param string $password
      */
-    protected function createAuthenticatedClient($username = '', $password = '')
+    protected function createAuthenticatedClient()
     {
-        if ($username == '' && $password == '') {
-            $username = $this->parameters['user_name'];
-            $password = $this->parameters['user_pass'];
-        }
-
-        $this->client = static::createClient();
         $this->client->request(
             'POST',
             '/login_check',
             [
-                'username' => $username,
-                'password' => $password,
+                'username' => $this->parameters['user_name'],
+                'password' => $this->parameters['user_pass'],
             ]
         );
 
