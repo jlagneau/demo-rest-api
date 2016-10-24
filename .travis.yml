@@ -15,7 +15,6 @@ before_script:
   - mkdir var/jwt
   - openssl genrsa -passout pass:passphrase -out var/jwt/private.pem -aes256 4096
   - openssl rsa -passin pass:passphrase -pubout -in var/jwt/private.pem -out var/jwt/public.pem
-  - sed -i -e "s/jwt_key_pass_phrase:.*/jwt_key_pass_phrase: passphrase/" app/config/parameters.yml
   - composer install --no-interaction --prefer-source
   - wget https://phar.phpunit.de/phpunit.phar
 
