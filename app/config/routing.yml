@@ -6,8 +6,11 @@ api_doc:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /doc
 
+api_login_check:
+    path:     /login_check
+
 homepage:
-    path: /
+    path:     /
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route:       nelmio_api_doc_index

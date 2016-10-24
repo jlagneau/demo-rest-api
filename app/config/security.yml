@@ -14,15 +14,30 @@ security:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
-            pattern: ^/
-            methods: [POST, PUT, PATCH, DELETE]
-            form_login: false
-            provider: fos_userbundle
-            http_basic: ~
+
+        login:
+            pattern:   ^/login
             stateless: true
             anonymous: true
+            provider:  fos_userbundle
+            form_login:
+                check_path:               api_login_check
+                username_parameter:       username
+                password_parameter:       password
+                require_previous_session: false
+                success_handler:          lexik_jwt_authentication.handler.authentication_success
+                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+
+        api:
+            pattern: ^/
+            methods: [POST, PUT, PATCH, DELETE]
+            stateless: true
+            anonymous: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
 
     access_control:
-        - { path: ^/article, roles: ROLE_API, methods: [POST, PUT, PATCH, DELETE] }
         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login_check$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/article, roles: ROLE_API, methods: [POST, PUT, PATCH, DELETE] }

@@ -27,7 +27,8 @@
 		"jms/serializer-bundle": "1.*",
 		"nelmio/api-doc-bundle": "^2.11.1",
 		"nelmio/cors-bundle": "^1.4.1",
-		"stof/doctrine-extensions-bundle": "^1.2.2"
+		"stof/doctrine-extensions-bundle": "^1.2.2",
+		"lexik/jwt-authentication-bundle": "^2.0"
 	},
 	"require-dev": {
 		"sensio/generator-bundle": "^3.0",

@@ -12,6 +12,9 @@ branches:
 
 before_script:
   - composer self-update
+  - mkdir var/jwt
+  - openssl genrsa -passout pass:passphrase -out var/jwt/private.pem -aes256 4096
+  - openssl rsa -passin pass:passphrase -pubout -in var/jwt/private.pem -out var/jwt/public.pem
   - composer install --no-interaction --prefer-source
   - wget https://phar.phpunit.de/phpunit.phar
 

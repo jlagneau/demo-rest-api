@@ -1,7 +1,6 @@
 <?php
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
-use Composer\Autoload\ClassLoader;
 
 error_reporting(error_reporting() & ~E_USER_DEPRECATED);
 
