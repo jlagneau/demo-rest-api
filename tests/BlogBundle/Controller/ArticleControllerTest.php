@@ -260,7 +260,7 @@ class ArticleControllerTest extends WebTestCase
             [],
             [
                 'CONTENT_TYPE' => 'application/json',
-                'ACCEPT'       => 'application/json',
+                'ACCEPT' => 'application/json',
             ],
             '{"content":"def"}'
         );
