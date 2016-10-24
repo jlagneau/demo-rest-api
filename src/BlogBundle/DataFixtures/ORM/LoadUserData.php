@@ -2,13 +2,13 @@
 
 namespace BlogBundle\DataFixtures\ORM;
 
+use BlogBundle\Entity\User;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use FOS\UserBundle\Model\UserInterface;
-use BlogBundle\Entity\User;
 
 class LoadUserData extends AbstractFixture implements FixtureInterface, ContainerAwareInterface
 {
@@ -40,7 +40,7 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, Containe
         $user->setEmail($this->container->getParameter('user_email'));
         $user->setPlainPassword($this->container->getParameter('user_pass'));
         $user->setEnabled(true);
-        $user->setRoles(array('ROLE_API'));
+        $user->setRoles(['ROLE_API']);
 
         return $user;
     }

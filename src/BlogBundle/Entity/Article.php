@@ -2,9 +2,9 @@
 
 namespace BlogBundle\Entity;
 
+use BlogBundle\Model\ArticleInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use BlogBundle\Model\ArticleInterface;
 
 /**
  * Article.
