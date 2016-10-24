@@ -19,8 +19,7 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('content')
-        ;
+            ->add('content');
     }
 
     /**
@@ -29,8 +28,8 @@ class ArticleType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'BlogBundle\Entity\Article',
-            'csrf_protection' => false,
+            'data_class'           => 'BlogBundle\Entity\Article',
+            'csrf_protection'      => false,
             'extra_fields_message' => 'blog_bundle.form.extra_fields',
         ]);
     }
