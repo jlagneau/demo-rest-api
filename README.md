@@ -3,6 +3,7 @@
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/51a77b1b-c6bd-4dde-8b7f-563a7ab3036f/mini.png)][1]
 [![Build Status](https://travis-ci.org/jlagneau/demo-rest-api.svg)][2]
 [![Coverage Status](https://img.shields.io/coveralls/jlagneau/demo-rest-api.svg)][3]
+[![StyleCI](https://styleci.io/repos/28689679/shield?branch=master)](https://styleci.io/repos/28689679)
 
 ---
 

@@ -2,15 +2,15 @@
 
 namespace BlogBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Request\ParamFetcherInterface;
-use FOS\RestBundle\Controller\Annotations as FOSRest;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use BlogBundle\Entity\Article;
 use BlogBundle\Exception\InvalidFormException;
+use FOS\RestBundle\Controller\Annotations as FOSRest;
+use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Request\ParamFetcherInterface;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @FOSRest\NamePrefix("api_")
@@ -62,9 +62,9 @@ class ArticleController extends FOSRestController
      *
      * @param Article $id the Article id
      *
-     * @return array
-     *
      * @throws NotFoundHttpException when the article does not exist
+     *
+     * @return array
      */
     public function getArticleAction(Article $id)
     {
@@ -191,9 +191,9 @@ class ArticleController extends FOSRestController
      * @param Request $request the request object
      * @param Article $id      the article id
      *
-     * @return FormTypeInterface|View
-     *
      * @throws NotFoundHttpException when the article does not exist
+     *
+     * @return FormTypeInterface|View
      */
     public function patchArticleAction(Request $request, Article $id)
     {
@@ -231,9 +231,9 @@ class ArticleController extends FOSRestController
      * @param Request $request the request object
      * @param Article $id      the article id
      *
-     * @return View
-     *
      * @throws NotFoundHttpException when the article does not exist
+     *
+     * @return View
      */
     public function deleteArticleAction(Article $id)
     {

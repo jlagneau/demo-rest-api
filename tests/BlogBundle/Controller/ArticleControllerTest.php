@@ -2,8 +2,8 @@
 
 namespace Tests\BlogBundle\Tests\Controller;
 
-use Tests\BlogBundle\CustomWebTestCase as WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
+use Tests\BlogBundle\CustomWebTestCase as WebTestCase;
 
 class ArticleControllerTest extends WebTestCase
 {
@@ -112,7 +112,7 @@ class ArticleControllerTest extends WebTestCase
      */
     public function testJsonPostBadCredentials()
     {
-        $this->createAuthenticatedClient("foo", "bar");
+        $this->createAuthenticatedClient('foo', 'bar');
         $this->client->request(
             'POST',
             '/articles.json',
@@ -343,9 +343,9 @@ class ArticleControllerTest extends WebTestCase
      * @param string $username
      * @param string $password
      */
-    protected function createAuthenticatedClient($username = "", $password = "")
+    protected function createAuthenticatedClient($username = '', $password = '')
     {
-        if ($username == "" && $password == "") {
+        if ($username == '' && $password == '') {
             $username = $this->parameters['user_name'];
             $password = $this->parameters['user_pass'];
         }
@@ -354,15 +354,15 @@ class ArticleControllerTest extends WebTestCase
         $this->client->request(
             'POST',
             '/login_check',
-            array(
+            [
                 'username' => $username,
                 'password' => $password,
-            )
+            ]
         );
 
         $data = json_decode($this->client->getResponse()->getContent(), true);
 
-        if (array_key_exists("token", $data)) {
+        if (array_key_exists('token', $data)) {
             $this->client->setServerParameter('HTTP_Authorization', sprintf('Bearer %s', $data['token']));
         }
     }

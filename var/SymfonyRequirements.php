@@ -122,7 +122,7 @@ class PhpIniRequirement extends Requirement
      *                                         or a callback function receiving the configuration value as parameter to determine the fulfillment of the requirement
      * @param bool          $approveCfgAbsence If true the Requirement will be fulfilled even if the configuration option does not exist, i.e. ini_get() returns false.
      *                                         This is helpful for abandoned configs in later PHP versions or configs of an optional extension, like Suhosin.
-     *                                         Example: You require a config to be true but PHP later removes this config and defaults it to true internally.
+     *                                         Example: You require a config to be true but PHP later removes this config and defaults it to true internally
      * @param string|null   $testMessage       The message for testing the requirement (when null and $evaluation is a boolean a default message is derived)
      * @param string|null   $helpHtml          The help text formatted in HTML for resolving the problem (when null and $evaluation is a boolean a default help is derived)
      * @param string|null   $helpText          The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
@@ -171,7 +171,7 @@ class RequirementCollection implements IteratorAggregate
     /**
      * @var Requirement[]
      */
-    private $requirements = array();
+    private $requirements = [];
 
     /**
      * Gets the current RequirementCollection as an Iterator.
@@ -227,7 +227,7 @@ class RequirementCollection implements IteratorAggregate
      *                                         or a callback function receiving the configuration value as parameter to determine the fulfillment of the requirement
      * @param bool          $approveCfgAbsence If true the Requirement will be fulfilled even if the configuration option does not exist, i.e. ini_get() returns false.
      *                                         This is helpful for abandoned configs in later PHP versions or configs of an optional extension, like Suhosin.
-     *                                         Example: You require a config to be true but PHP later removes this config and defaults it to true internally.
+     *                                         Example: You require a config to be true but PHP later removes this config and defaults it to true internally
      * @param string        $testMessage       The message for testing the requirement (when null and $evaluation is a boolean a default message is derived)
      * @param string        $helpHtml          The help text formatted in HTML for resolving the problem (when null and $evaluation is a boolean a default help is derived)
      * @param string|null   $helpText          The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
@@ -245,7 +245,7 @@ class RequirementCollection implements IteratorAggregate
      *                                         or a callback function receiving the configuration value as parameter to determine the fulfillment of the requirement
      * @param bool          $approveCfgAbsence If true the Requirement will be fulfilled even if the configuration option does not exist, i.e. ini_get() returns false.
      *                                         This is helpful for abandoned configs in later PHP versions or configs of an optional extension, like Suhosin.
-     *                                         Example: You require a config to be true but PHP later removes this config and defaults it to true internally.
+     *                                         Example: You require a config to be true but PHP later removes this config and defaults it to true internally
      * @param string        $testMessage       The message for testing the requirement (when null and $evaluation is a boolean a default message is derived)
      * @param string        $helpHtml          The help text formatted in HTML for resolving the problem (when null and $evaluation is a boolean a default help is derived)
      * @param string|null   $helpText          The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
@@ -282,7 +282,7 @@ class RequirementCollection implements IteratorAggregate
      */
     public function getRequirements()
     {
-        $array = array();
+        $array = [];
         foreach ($this->requirements as $req) {
             if (!$req->isOptional()) {
                 $array[] = $req;
@@ -299,7 +299,7 @@ class RequirementCollection implements IteratorAggregate
      */
     public function getFailedRequirements()
     {
-        $array = array();
+        $array = [];
         foreach ($this->requirements as $req) {
             if (!$req->isFulfilled() && !$req->isOptional()) {
                 $array[] = $req;
@@ -316,7 +316,7 @@ class RequirementCollection implements IteratorAggregate
      */
     public function getRecommendations()
     {
-        $array = array();
+        $array = [];
         foreach ($this->requirements as $req) {
             if ($req->isOptional()) {
                 $array[] = $req;
@@ -333,7 +333,7 @@ class RequirementCollection implements IteratorAggregate
      */
     public function getFailedRecommendations()
     {
-        $array = array();
+        $array = [];
         foreach ($this->requirements as $req) {
             if (!$req->isFulfilled() && $req->isOptional()) {
                 $array[] = $req;
@@ -448,7 +448,7 @@ class SymfonyRequirements extends RequirementCollection
         }
 
         if (false !== $requiredPhpVersion && version_compare($installedPhpVersion, $requiredPhpVersion, '>=')) {
-            $timezones = array();
+            $timezones = [];
             foreach (DateTimeZone::listAbbreviations() as $abbreviations) {
                 foreach ($abbreviations as $abbreviation) {
                     $timezones[$abbreviation['timezone_id']] = true;
@@ -728,8 +728,7 @@ class SymfonyRequirements extends RequirementCollection
             ||
             (extension_loaded('xcache') && ini_get('xcache.cacher'))
             ||
-            (extension_loaded('wincache') && ini_get('wincache.ocenabled'))
-        ;
+            (extension_loaded('wincache') && ini_get('wincache.ocenabled'));
 
         $this->addRecommendation(
             $accelerator,

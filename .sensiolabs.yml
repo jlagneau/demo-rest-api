@@ -1,23 +1,27 @@
 # SensioLabs Insight configuration
 #
-# pre_composer_script: |
-#   #!/bin/bash
-#
-#   # Do what you need to setup your project
-#   cp app/config/parameters.yml.dist app/config/parameters.yml
-#   sed -i -e \"s/secret:.*/secret: YoLo/\" app/config/parameters.yml
-#   sed -i -e \"s/server_version:.*/server_version: 5.5/\" app/config/parameters.yml
-#
-# post_composer_script: |
-#   #!/bin/bash
-#
-#   # Do what you need to configure your project
-#   php ./bin/console doctrine:database:create --no-interaction
-#   php ./bin/console doctrine:schema:create --no-interaction
-#
-# php_ini: |
-#   extension=openssl.so
-#   extension=mcrypt.so
+pre_composer_script: |
+  #!/bin/bash
+
+  # Do what you need to setup your project
+  cp app/config/parameters.yml.dist app/config/parameters.yml
+  sed -i -e \"s/secret:.*/secret: YoLo/\" app/config/parameters.yml
+  sed -i -e \"s/server_version:.*/server_version: 5.5/\" app/config/parameters.yml
+
+  mkdir var/jwt
+  openssl genrsa -passout pass:passphrase -out var/jwt/private.pem -aes256 4096
+  openssl rsa -passin pass:passphrase -pubout -in var/jwt/private.pem -out var/jwt/public.pem
+
+post_composer_script: |
+  #!/bin/bash
+
+  # Do what you need to configure your project
+  php ./bin/console doctrine:database:create --no-interaction
+  php ./bin/console doctrine:schema:create --no-interaction
+
+php_ini: |
+  extension=openssl.so
+  extension=mcrypt.so
 
 global_exclude_dirs:
     - vendor

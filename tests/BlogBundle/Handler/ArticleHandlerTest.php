@@ -74,7 +74,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
              ->with([], null, $limit, $offset)
              ->will($this->returnValue($articles));
 
-        $this->ArticleHandler = $this->createArticleHandler($this->om, static::ARTICLE_CLASS,  $this->formFactory);
+        $this->ArticleHandler = $this->createArticleHandler($this->om, static::ARTICLE_CLASS, $this->formFactory);
         $all = $this->ArticleHandler->all($limit, $offset);
         $this->assertEquals($articles, $all);
     }
@@ -92,7 +92,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
              ->with($this->equalTo($id))
              ->will($this->returnValue($article));
 
-        $this->ArticleHandler = $this->createArticleHandler($this->om, static::ARTICLE_CLASS,  $this->formFactory);
+        $this->ArticleHandler = $this->createArticleHandler($this->om, static::ARTICLE_CLASS, $this->formFactory);
         $this->ArticleHandler->get($id);
     }
 
@@ -122,7 +122,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
              ->method('create')
              ->will($this->returnValue($form));
 
-        $this->ArticleHandler = $this->createArticleHandler($this->om, static::ARTICLE_CLASS,  $this->formFactory);
+        $this->ArticleHandler = $this->createArticleHandler($this->om, static::ARTICLE_CLASS, $this->formFactory);
         $articleObject = $this->ArticleHandler->post($parameters);
         $this->assertEquals($articleObject, $article);
     }
@@ -152,7 +152,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
              ->method('create')
              ->will($this->returnValue($form));
 
-        $this->ArticleHandler = $this->createArticleHandler($this->om, static::ARTICLE_CLASS,  $this->formFactory);
+        $this->ArticleHandler = $this->createArticleHandler($this->om, static::ARTICLE_CLASS, $this->formFactory);
         $this->ArticleHandler->post($parameters);
     }
 
@@ -182,7 +182,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
              ->method('create')
              ->will($this->returnValue($form));
 
-        $this->ArticleHandler = $this->createArticleHandler($this->om, static::ARTICLE_CLASS,  $this->formFactory);
+        $this->ArticleHandler = $this->createArticleHandler($this->om, static::ARTICLE_CLASS, $this->formFactory);
         $articleObject = $this->ArticleHandler->put($article, $parameters);
         $this->assertEquals($articleObject, $article);
     }
@@ -213,7 +213,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
              ->method('create')
              ->will($this->returnValue($form));
 
-        $this->ArticleHandler = $this->createArticleHandler($this->om, static::ARTICLE_CLASS,  $this->formFactory);
+        $this->ArticleHandler = $this->createArticleHandler($this->om, static::ARTICLE_CLASS, $this->formFactory);
         $articleObject = $this->ArticleHandler->patch($article, $parameters);
         $this->assertEquals($articleObject, $article);
     }
@@ -247,7 +247,7 @@ class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
     /**
      * Get a list of Articles.
      *
-     * @param int $maxArticles The number of Articles to retrieve.
+     * @param int $maxArticles The number of Articles to retrieve
      *
      * @return array
      */
