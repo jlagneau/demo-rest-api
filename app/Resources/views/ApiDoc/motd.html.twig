@@ -1,7 +1,11 @@
 <section class="motd">
     <h2>Authentication</h2>
     <p>
-      Every secured resources (represented by a key icon) need a basic HTTP
-      authentication.
+      Every secured resources (represented by a key icon) need a bearer HTTP
+      authentication token.
+    </p>
+    <p>
+      To obtain the authentication token send a POST request to <code>/login_check</code>
+      with <code>username</code> and <code>password</code> 
     </p>
 </section>
