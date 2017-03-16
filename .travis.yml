@@ -18,6 +18,7 @@ before_script:
   - composer install --no-interaction --prefer-source
   - wget https://phar.phpunit.de/phpunit.phar
   - php phpunit.phar --version
+  - if [[ $TRAVIS_PHP_VERSION == hhv* ]]; then echo hhvm.php7.all=1 >> /etc/hhvm/php.ini; fi
 
 script: php phpunit.phar --coverage-clover build/logs/clover.xml
 
