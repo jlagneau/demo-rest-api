@@ -4,7 +4,10 @@ namespace BlogBundle\Entity;
 
 use BlogBundle\Model\ArticleInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 
 /**
  * Article.
@@ -14,6 +17,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Article implements ArticleInterface
 {
+    use TimestampableEntity;
+    use SoftDeleteableEntity;
+
     /**
      * @var int
      *
@@ -31,11 +37,11 @@ class Article implements ArticleInterface
      * )
      * @Assert\Length(
      *      min = 3,
-     *      max = 255,
+     *      max = 128,
      *      minMessage = "blog_bundle.article.title.min_message",
      *      maxMessage = "blog_bundle.article.title.max_message"
      * )
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=128)
      */
     private $title;
 
@@ -52,6 +58,14 @@ class Article implements ArticleInterface
      * @ORM\Column(name="content", type="text")
      */
     private $content;
+
+    /**
+     * @var string
+     *
+     * @Gedmo\Slug(fields={"createdAt", "title"}, updatable=false, unique=true, dateFormat="d-m-Y")
+     * @Doctrine\ORM\Mapping\Column(length=255, unique=true)
+     */
+    private $slug;
 
     /**
      * Get id.
@@ -109,5 +123,29 @@ class Article implements ArticleInterface
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * Set slug.
+     *
+     * @param string $slug
+     *
+     * @return Article
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug.
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }
