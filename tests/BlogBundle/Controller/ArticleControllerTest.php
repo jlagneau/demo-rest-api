@@ -45,6 +45,7 @@ class ArticleControllerTest extends WebTestCase
             $this->assertTrue(isset($article['id']));
             $this->assertTrue(isset($article['title']));
             $this->assertTrue(isset($article['content']));
+            $this->assertTrue(isset($article['slug']));
         }
 
         $route = $this->getUrl('api_get_article', ['id' => 1, '_format' => 'json']);
@@ -56,6 +57,7 @@ class ArticleControllerTest extends WebTestCase
         $this->assertTrue(isset($decoded['id']));
         $this->assertTrue(isset($decoded['title']));
         $this->assertTrue(isset($decoded['content']));
+        $this->assertTrue(isset($article['slug']));
     }
 
     /**
