@@ -131,7 +131,7 @@ class ArticleHandlerTest extends TestCase
     /**
      * Test invalid Article method.
      *
-     * @expectedException BlogBundle\Exception\InvalidFormException
+     * @expectedException \BlogBundle\Exception\InvalidFormException
      */
     public function testArticleShouldRaiseException()
     {
