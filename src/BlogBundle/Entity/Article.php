@@ -63,7 +63,7 @@ class Article implements ArticleInterface
      * @var string
      *
      * @Gedmo\Slug(fields={"createdAt", "title"}, updatable=false, unique=true, dateFormat="d-m-Y")
-     * @Doctrine\ORM\Mapping\Column(length=255, unique=true)
+     * @ORM\Column(length=255, unique=true)
      */
     private $slug;
 
