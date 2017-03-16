@@ -81,7 +81,7 @@ class ArticleController extends FOSRestController
      * @Security("has_role('ROLE_API')")
      *
      * @ApiDoc(
-     *   authentication=true,
+     *   authentication = true,
      *   resource = true,
      *   description = "Create a new article from the submitted data.",
      *   input = "BlogBundle\Form\Type\ArticleType",
@@ -119,12 +119,12 @@ class ArticleController extends FOSRestController
     }
 
     /**
-     * Update existing article from the submitted data or create a new article at a specific location.
+     * Update existing article from the submitted data or create an article at a specific location.
      *
      * @Security("has_role('ROLE_API')")
      *
      * @ApiDoc(
-     *   authentication=true,
+     *   authentication = true,
      *   resource = true,
      *   input = "BlogBundle\Form\Type\ArticleType",
      *   statusResponse = {
@@ -175,7 +175,7 @@ class ArticleController extends FOSRestController
      * @Security("has_role('ROLE_API')")
      *
      * @ApiDoc(
-     *   authentication=true,
+     *   authentication = true,
      *   resource = true,
      *   input = "BlogBundle\Form\Type\ArticleType",
      *   statusResponse = {
@@ -216,7 +216,7 @@ class ArticleController extends FOSRestController
      * @Security("has_role('ROLE_API')")
      *
      * @ApiDoc(
-     *   authentication=true,
+     *   authentication = true,
      *   resource = true,
      *   description = "Delete an article for a given id.",
      *   statusResponse = {
