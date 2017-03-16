@@ -34,32 +34,31 @@
 		"sensio/generator-bundle": "^3.0",
 		"symfony/phpunit-bridge": "3.3.*@dev",
 		"doctrine/doctrine-fixtures-bundle": "~2.0",
-		"satooshi/php-coveralls": "~0.6",
-		"liip/functional-test-bundle":"^1.3.4",
+		"satooshi/php-coveralls": "^1.0",
+		"liip/functional-test-bundle":"^1.7.0",
 		"ext-pdo_sqlite": "*"
 	},
 	"scripts": {
+		"symfony-scripts": [
+				"Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+				"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+				"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+				"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+				"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+				"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+		],
 		"post-install-cmd": [
-			"Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+				"@symfony-scripts"
 		],
 		"post-update-cmd": [
-			"Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+				"@symfony-scripts"
 		]
 	},
 	"config": {
 		"platform": {
-			"php": "5.5.9"
-		}
+			"php": "7.0"
+		},
+    "sort-packages": true
 	},
 	"extra": {
 		"symfony-app-dir": "app",
@@ -72,7 +71,7 @@
 			"file": "app/config/parameters.yml"
 		},
 		"branch-alias": {
-			"dev-master": "3.1-dev"
+			"dev-master": "3.2-dev"
 		}
 	}
 }
