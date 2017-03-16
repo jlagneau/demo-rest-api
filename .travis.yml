@@ -1,8 +1,8 @@
 language: php
 
 php:
-  - 5.6
   - 7
+  - 7.1
   - hhvm
 
 branches:
@@ -17,6 +17,7 @@ before_script:
   - openssl rsa -passin pass:passphrase -pubout -in var/jwt/private.pem -out var/jwt/public.pem
   - composer install --no-interaction --prefer-source
   - wget https://phar.phpunit.de/phpunit.phar
+  - php phpunit.phar --version
 
 script: php phpunit.phar --coverage-clover build/logs/clover.xml
 
