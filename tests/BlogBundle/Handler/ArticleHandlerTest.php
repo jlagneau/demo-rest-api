@@ -4,8 +4,9 @@ namespace Tests\BlogBundle\Handler;
 
 use BlogBundle\Entity\Article;
 use BlogBundle\Handler\ArticleHandler;
+use PHPUnit\Framework\TestCase;
 
-class ArticleHandlerTest extends \PHPUnit_Framework_TestCase
+class ArticleHandlerTest extends TestCase
 {
     const ARTICLE_CLASS = 'Tests\BlogBundle\Handler\DummyArticle';
 
